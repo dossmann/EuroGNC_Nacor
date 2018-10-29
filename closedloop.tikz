@@ -1,0 +1,68 @@
+\usetikzlibrary{positioning,plotmarks, matrix, arrows, calc, shapes}
+\tikzstyle{blockdiag}	= [node distance=5mm, >=stealth', semithick]
+\tikzstyle{block}			= [draw, rectangle, minimum width=1.05cm, minimum
+height=.8cm]
+
+
+\tikzstyle{block2}			= [draw, rectangle, minimum width=1.05cm, minimum
+height=.8cm, fill=white]
+
+\tikzstyle{sum} = [draw,circle,inner sep=0pt, minimum size=6pt]
+\tikzstyle{connector} = [draw,circle,inner sep=0pt, minimum size=0.001pt, 
+fill=black]
+\tikzstyle{connector2} = [draw,circle,inner sep=0pt, minimum size=2pt, 
+fill=black]
+\tikzstyle{gain} = [draw,regular polygon, regular polygon 	sides=3,thick,minimum height=3em,minimum width=4em, rotate=30]
+\tikzstyle{bguide} = [rectangle,minimum height=3em,minimum	width=4em]
+\tikzstyle{line} = [thick]
+\tikzstyle{branch} = [circle,inner sep=0pt,minimum size=1mm,fill=black,draw=black]
+\tikzstyle{guide} = [anchor=center]
+
+\pgfdeclarelayer{bg}    % declare background layer
+\pgfsetlayers{bg,main}
+
+\begin{tikzpicture}[blockdiag, auto, scale=0.8]
+
+% Blocks
+\node[block,minimum width=1.25cm, minimum height=1.5cm](Plant) {$AC$};
+\node[block, minimum width=1.25cm, minimum height=1cm,left=of Plant, xshift=-1.5cm, yshift=0.47cm] (C) {$C_\eta$};
+\node[block, minimum width=1.25cm, minimum height=1cm,below=of Plant,  yshift=0cm] (Obsv) {$O_e$};
+\node[block, minimum width=1cm, minimum height=.8cm,below=of Obsv,  yshift=-0.2cm] (logic) {$> \tau_{th}$};
+\node[block2, minimum width=1.25cm, minimum height=1cm,left=of Obsv, xshift=-1.5cm, yshift=0.5cm] (Cload) {$C_{LA}$};
+
+
+\node[connector2, right=of Plant, xshift = 0.65cm] (con1) {}; 
+\node[connector2, right=of Plant, xshift = 0.25cm, yshift = 0.5cm] (con2) {}; 
+\node[connector2, right=of Cload, xshift = 0.65cm, yshift = -0.23cm] (con3) {}; 
+\node[connector2, right=of Cload, xshift = 0.25cm, yshift = 0.25cm] (con4) {}; 
+\node[connector2, right=of C, xshift = 1cm] (con5) {}; 
+\node[connector, below=of Cload, xshift = -0.5cm, yshift = 0.2cm] (con6) {}; 
+\node[connector, above=of Cload, xshift = 0.5cm, yshift = -0.2cm] (con7) {}; 
+\node[connector, right=of Plant, xshift = 1.05cm, yshift = -0.5cm] (con8) {}; 
+
+\draw[->]  (Plant.east) ++(0cm,0.6cm)  --  ++(1cm,0cm) node[pos=0.27,yshift=-1mm] {$q$} --  ++(0cm,1.75cm)   -- ++(-7cm,0cm) |- ($(C.west)+(0cm,0.3cm)$);
+\draw[->]  (Plant.east) ++(0cm,0cm)  --  ++(1.5cm,0cm) node[pos=0.27,yshift=-1mm] {$n_z$}  --  ++(0cm,2.75cm)   -- ++(-7.75cm,0cm) |- ($(C.west)+(0cm,-0.3cm)$);
+
+\draw[->]  (Cload.east) ++(0cm,0.3cm)  --  ++(1.0cm,0cm) node[pos=0.35,yshift=-1mm] {$\xi_i$}    |- ($(Plant.west)+(0cm,0cm)$);
+\draw[->]  (Cload.east) ++(0cm,-0.3cm)  --  ++(1.5cm,0cm) node[pos=0.27,yshift=-1mm] {$\xi_o$}    |- ($(Plant.west)+(0cm,-0.6cm)$);
+
+\draw[->]  (C)  --  ($(Plant.west)+(0cm,0.59cm)$)node[pos=0.13]{$\eta$};
+\draw[->]   (Obsv.south) -- (logic) node[pos=0.4]{$\tilde d$} ;
+\draw[<-] (Plant.north) -- +(0cm, +1cm)node[left, pos=.7]{$d$};
+
+\draw[->]  (con1)  |-  ($(Obsv.east)+(0cm,-0.3cm)$);
+\draw[->]  (con2)  |-  ($(Obsv.east)+(0cm,0.3cm)$);
+
+\draw[->]  (con5)  |-  ($(Obsv.west)+(0cm,0.5cm)$);
+\draw[->]  (con4)  |-  ($(Obsv.west)+(0cm,0cm)$);
+\draw[->]  (con3)  |-  ($(Obsv.west)+(0cm,-0.5cm)$);
+\draw[-]  (logic.west) -| (con6)node[pos=0.04, above]{$i$} ;
+
+\begin{pgfonlayer}{bg}    % select the background layer
+        \draw[->]  (con6) -- (con7);
+\end{pgfonlayer}
+
+\draw[-]  (Plant.east)++(0cm,-0.625cm)   --  (con8)node[pos=0.15,yshift=-1mm] {$\alpha$};
+\draw[->]  (con8)  -- ++(0.0cm,-4.5cm)  -- ++(-8.5cm,0cm)  |-  (Cload.west);
+
+;\end{tikzpicture} 
