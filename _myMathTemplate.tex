@@ -1,0 +1,203 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Mathematics
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% Couleurs/Style
+\providecommand{\code}[1]{\textbf{\texttt{#1}}} %
+\providecommand{\codeScript}[1]{\blue{\textbf{\texttt{#1}}}} %
+
+\providecommand{\onera}[0]{\textbf{ONERA}~}
+\providecommand{\dav}[0]{\textbf{Dassault-Aviation}~}
+\providecommand{\airbus}[0]{\textbf{Airbus}~}
+\providecommand{\edf}[0]{\textbf{EDF}~}
+\providecommand{\dlr}[0]{\textbf{DLR}~}
+
+\providecommand{\matlab}[0]{\textsc{{Matlab}}~}
+\providecommand{\simulink}[0]{\textsc{{Simulink}}~}
+\providecommand{\more}[0]{\textsc{\textbf{More}}~}
+\providecommand{\compleib}[0]{COMPl$_e$ib~\cite{Compleib}~}
+\providecommand{\rms}[0]{\textbf{RMS}~}
+\providecommand{\hifi}[0]{\textbf{HiFi}~}
+\providecommand{\gvt}[0]{\textbf{GVT}~}
+\providecommand{\wtt}[0]{\textbf{WTT}~}
+\providecommand{\wt}[0]{\textbf{WT}~}
+\providecommand{\mimo}[0]{\textbf{MIMO}~}
+\providecommand{\simo}[0]{\textbf{SIMO}~}
+\providecommand{\miso}[0]{\textbf{MISO}~}
+\providecommand{\siso}[0]{\textbf{SISO}~}
+\providecommand{\dae}[0]{\textbf{DAE}~}
+\providecommand{\ode}[0]{\textbf{ODE}~}
+\providecommand{\lti}[0]{\textbf{LTI}~}
+\providecommand{\lp}[0]{\textbf{P-LTI}~}
+\providecommand{\tds}[0]{\textbf{TDS}~}
+\providecommand{\lpv}[0]{\textbf{LPV}~}
+\providecommand{\svd}[0]{\textbf{SVD}~} %
+\providecommand{\lfr}[0]{\textbf{LFR}~}
+\providecommand{\lft}[0]{\textbf{LFT}~}
+\providecommand{\fft}[0]{\textbf{FFT}~}
+\providecommand{\itia}[0]{\textbf{ITIA}~}
+\providecommand{\irka}[0]{\textbf{IRKA}~}
+\providecommand{\tfirka}[0]{\textbf{TF-IRKA}~}
+\providecommand{\istia}[0]{\textbf{ISTIA}~}
+\providecommand{\flistia}[0]{\textbf{FL-ISTIA}~}
+\providecommand{\ietia}[0]{\textbf{IETIA}~}
+\providecommand{\darpo}[0]{\textbf{DARPO}~}
+\providecommand{\ioditia}[0]{\textbf{IO-dITIA}~}
+\providecommand{\bt}[0]{\textbf{BT}~}
+\providecommand{\tsia}[0]{\textbf{TSIA}~}
+\providecommand{\loe}[0]{\textbf{Loewner}~}
+\providecommand{\iloe}[0]{\textbf{iLoewner}~}
+\providecommand{\ploe}[0]{\textbf{pLoewner}~}
+
+
+\providecommand{\question}[1]{\red{\textbf{#1}}}
+%\providecommand{\ie}[0]{\emph{i.e.}~}
+%\providecommand{\etc}[0]{\emph{etc.}~}
+%\providecommand{\eg}[0]{\emph{e.g.}~}
+\providecommand{\ie}[0]{{i.e.}}
+\providecommand{\etc}[0]{{etc.}~}
+\providecommand{\eg}[0]{{e.g.}}
+
+
+\definecolor{bleuONERA}{RGB}{16,97,169}
+\definecolor{grisONERA}{RGB}{64,64,66}
+\providecommand{\blue}[1]{\textcolor[RGB]{16,97,169}{#1}} % Bleu charte ONERA
+\providecommand{\blueb}[1]{\textbf{\textcolor[RGB]{16,97,169}{#1}}} % Bleu charte ONERA
+\providecommand{\grey}[1]{\textcolor[RGB]{64,64,66}{#1}} % Gris charte ONERA
+\providecommand{\greyb}[1]{\textbf{\textcolor[RGB]{64,64,66}{#1}}} % Gris charte ONERA
+\providecommand{\red}[1]{\textcolor[rgb]{0.98,0.00,0.00}{#1}}
+\providecommand{\redb}[1]{\textbf{\textcolor[rgb]{0.98,0.00,0.00}{#1}}}
+\providecommand{\green}[1]{\textcolor[rgb]{0.00,0.58,0.00}{#1}}
+\providecommand{\greenb}[1]{\textbf{\textcolor[rgb]{0.00,0.58,0.00}{#1}}}
+
+\providecommand{\orangeLight}[1]{\textcolor[rgb]{1,0.5,0}{#1}}
+
+\providecommand{\nok}[0]{\red{$\times$}}
+\providecommand{\ok}[0]{\green{$\surd$}}
+
+% Evironnements
+\newenvironment{eq}{\everymath {\displaystyle \everymath{ }} \equation}{ \endequation} %
+\newenvironment{eqn}{\everymath {\displaystyle \everymath{ }\nonumber}  \equation}{ \endequation} %
+
+% Operateurs
+\DeclareMathOperator*{\argmin}{\mathbf{argmin}}
+\DeclareMathOperator*{\rank}{\mathbf{rank}}
+%\DeclareMathOperator*{\colspan}{\mathbf{span}}
+
+\providecommand{\abs}[1]{\left\lvert #1 \right\rvert} %
+%\providecommand{\norm}[1]{\left\lVert #1 \right\rVert} %
+\providecommand{\norm}[1]{|| #1 ||} %
+\providecommand{\eval}[2]{\left.#1\right\rvert_{#2}} %
+\providecommand{\diag}[0]{\mathbf{diag} } %
+\providecommand{\svd}[0]{\mathbf{SVD} } %
+\providecommand{\im}[0]{\mathbf{Im} } %
+\providecommand{\kernel}[0]{\mathbf{ker} } %
+\providecommand{\trace}[0]{\mathbf{tr} } %
+\providecommand{\res}[0]{\mathbf{res} } %
+\providecommand{\Res}[1]{\Phi_{#1} } %
+\providecommand{\det}[0]{\mathbf{det} } %
+\providecommand{\ulft}[2]{\mathcal{F}_u(#1,#2)} %
+\providecommand{\llft}[2]{\mathcal{F}_l(#1,#2)} %
+\providecommand{\nynu}[0]{n_y\times n_u} %
+\providecommand{\squarepow}[0]{\frac{1}{2}} %
+\providecommand{\order}[0]{\mathbf{order}} %
+
+\providecommand{\colspan}[1]{\mathbf{span}\left[ #1 \right]} %
+\providecommand{\pare}[1]{\left(#1\right) } %
+\providecommand{\tr}[1]{\trace\pare{#1} } %
+
+% Vecteurs et systemes
+\providecommand{\x}[0]{\mathbf{x}} %
+\providecommand{\dx}[0]{\mathbf{\dot{x}}} %
+\providecommand{\ddx}[0]{\mathbf{\ddot{x}}} %
+\providecommand{\xr}[0]{\mathbf{\hat{x}}} %
+\providecommand{\dxr}[0]{\mathbf{\dot{\hat{x}}}} %
+\providecommand{\ddxr}[0]{\mathbf{\ddot{\hat{x}}}} %
+\renewcommand{\u}{\mathbf{u}} %
+\providecommand{\y}[0]{\mathbf{y}} %
+\providecommand{\yr}[0]{\mathbf{\hat{y}}} %
+\providecommand{\lv}[0]{\mathbf{l}} %
+\providecommand{\rv}[0]{\mathbf{r}} %
+\providecommand{\wv}[0]{\mathbf{w}} %
+\providecommand{\vv}[0]{\mathbf{v}} %
+\providecommand{\pv}[0]{\mathbf{p}} %
+\providecommand{\cv}[0]{\mathbf{c}} %
+\providecommand{\bv}[0]{\mathbf{b}} %
+
+\providecommand{\Hrealr}[0]{\mathcal{\hat{S}}} %
+\providecommand{\Htranr}[0]{\mathbf{\hat{H}}} %
+\providecommand{\Htransr}[0]{\mathbf{\hat{H}}(s)} %
+\providecommand{\Er}[0]{{\hat{E}}} %
+\providecommand{\Ar}[0]{{\hat{A}}} %
+\providecommand{\Br}[0]{{\hat{B}}} %
+\providecommand{\Cr}[0]{{\hat{C}}} %
+\providecommand{\Dr}[0]{{\hat{D}}} %
+
+\providecommand{\Hreal}[0]{\mathcal{S}} %
+\providecommand{\Htran}[0]{\mathbf{H}} %
+\providecommand{\Gtran}[0]{\mathbf{G}} %
+\providecommand{\Htrans}[0]{\mathbf{H}(s)} %
+\providecommand{\E}[0]{{E}} %
+\providecommand{\A}[0]{{A}} %
+\providecommand{\B}[0]{{B}} %
+\providecommand{\C}[0]{{C}} %
+\providecommand{\D}[0]{{D}} %
+
+\providecommand{\LL}[0]{{\mathds L}} %
+\providecommand{\sLL}[0]{{\mathds L_\sigma}} %
+
+% Espaces
+\providecommand{\Htwo}[0]{{\mathcal{H}_{2}}} %
+\providecommand{\Htwos}[0]{{\mathcal{H}_{2}^{\nynu}}} %
+\providecommand{\Htwow}[0]{{\mathcal{H}_{2,\Omega}}} %
+\providecommand{\Htwows}[0]{{\mathcal{H}_{2,\Omega}^{\nynu}}} %
+\providecommand{\Hinf}[0]{{\mathcal{H}_{\infty}}} %
+\providecommand{\Hinfs}[0]{{\mathcal{H}_{\infty}^{\nynu}}} %
+\providecommand{\Hinfw}[0]{{\mathcal{H}_{\infty,\Omega}}} %
+\providecommand{\Hinfws}[0]{{\mathcal{H}_{\infty,\Omega}^{\nynu}}} %
+\providecommand{\Ltwo}[0]{{\mathcal{L}_{2}}} %
+\providecommand{\Ltwos}[0]{{\mathcal{L}_{2}^{\nynu}}} %
+\providecommand{\Ltwow}[0]{{\mathcal{L}_{2,\Omega}}} %
+\providecommand{\Ltwows}[0]{{\mathcal{L}_{2,\Omega}^{\nynu}}} %
+\providecommand{\Linf}[0]{{\mathcal{L}_{\infty}}} %
+\providecommand{\Linfs}[0]{{\mathcal{L}_{\infty}^{\nynu}}} %
+\providecommand{\Linfw}[0]{{\mathcal{L}_{\infty,\Omega}}} %
+\providecommand{\Linfws}[0]{{\mathcal{L}_{\infty,\Omega}^{\nynu}}} %
+
+\providecommand{\Cplx}[0]{\mathbb{C}} %
+\providecommand{\Real}[0]{\mathbb{R}} %
+\providecommand{\Nat}[0]{\mathbb{N}} %
+
+\providecommand{\gramo}[0]{\mathcal{O}} %
+\providecommand{\gramc}[0]{\mathcal{C}} %
+
+% Matrices/Vecteurs
+\providecommand{\matrixtwo}[4]{ \left[\begin{array}{cc} #1 & #2 \\ #3 & #4 \end{array}\right] } %
+\providecommand{\matrixthree}[9]{ \left[\begin{array}{ccc} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9\end{array}\right] } %
+\providecommand{\matrixtwocross}[4]{ \left[\begin{array}{c|c} #1 & #2 \\ \hline #3 & #4 \end{array}\right] } %
+\providecommand{\matrixthreecross}[9]{ \left[\begin{array}{c|cc} #1 & #2 & #3 \\ \hline #4 & #5 & #6 \\ #7 & #8 & #9\end{array}\right] } %
+\providecommand{\vectortwo}[2]{ \left[\begin{array}{c} #1 \\ #2 \end{array}\right] } %
+\providecommand{\vectorthree}[3]{ \left[\begin{array}{c} #1 \\ #2 \\ #3 \end{array}\right] } %
+\providecommand{\vectorfour}[4]{ \left[\begin{array}{c} #1 \\ #2 \\ #3 \\ #4 \end{array}\right] } %
+\providecommand{\vectortwoT}[2]{ \left[\begin{array}{cc} #1 & #2 \end{array}\right] } %
+\providecommand{\vectorthreeT}[3]{ \left[\begin{array}{ccc} #1 & #2 & #3 \end{array}\right] }%
+\providecommand{\vectorfourT}[4]{ \left[\begin{array}{cccc} #1 & #2 & #3 & #4 \end{array}\right] }%
+\providecommand{\vectorfiveT}[5]{ \left[\begin{array}{ccccc} #1 & #2 & #3 & #4 & #5 \end{array}\right] } %
+\providecommand{\vectorfive}[5]{ \left[\begin{array}{c} #1 \\ #2 \\ #3 \\ #4 \\ #5 \end{array}\right] } 
+
+%% Use case
+%\providecommand{\useCase}[2]{
+%\tikzstyle{mybox} = [draw=black, fill=blue!20, very thick, rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+%\tikzstyle{fancytitle} = [draw=black, fill=white, text=black, very thick, rounded corners]
+%\begin{tikzpicture}
+%\node [mybox] (box){%
+%    \begin{minipage}{1\textwidth}
+%        #2
+%    \end{minipage}
+%};
+%\node[fancytitle, right=10pt] at (box.north west) {\Large #1};
+%\node[fancytitle, rounded corners] at (box.east) {$\clubsuit$};
+%\end{tikzpicture}
+%} %

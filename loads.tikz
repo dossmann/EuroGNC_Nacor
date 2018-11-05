@@ -1,0 +1,238 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=2in,
+height=1in,
+at={(0in,0in)},
+scale only axis,
+xmin=0,
+xmax=12,
+xmajorgrids,
+ymin=0.8,
+ymax=1.03,
+ylabel={Loads (-)},
+xtick={\empty},
+ylabel style={yshift=-2mm},
+axis background/.style={fill=white}
+]
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	1.00195181413465\\
+2	1.00129732612768\\
+6	0.988343306397188\\
+8	0.932542884548768\\
+10	0.865205911207735\\
+11.886	0.386772533773161\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.986264606036233\\
+2	0.994594856711688\\
+6	0.95570433135643\\
+8	0.90029175653977\\
+10	0.849459330496643\\
+11.886	0.381880350833618\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	1.00064696005064\\
+2	1.00073897350634\\
+6	0.990359950845582\\
+8	0.935174802134785\\
+10	0.868361009698383\\
+11.886	0.400077716617977\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.984586159932808\\
+2	0.993664758890695\\
+6	0.957336116398166\\
+8	0.902794981444103\\
+10	0.852720526839968\\
+11.886	0.395941859017669\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.95779921479777\\
+2	0.95348793978344\\
+6	0.999341799446966\\
+8	0.996449883540052\\
+10	0.998603714710601\\
+11.886	0.471408052208436\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.989321890083851\\
+2	0.987742008433769\\
+6	0.971219057853963\\
+8	0.941239018080677\\
+10	0.919982140373679\\
+11.886	0.368246984840231\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.972598183067447\\
+2	0.979733133770186\\
+6	0.939918497231123\\
+8	0.914940226791697\\
+10	0.909403727970855\\
+11.886	0.364349540824106\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.952064837069032\\
+2	0.948777866605026\\
+6	0.997388056201127\\
+8	0.995031580729844\\
+10	0.998604993279402\\
+11.886	0.470492345521249\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.988814899963441\\
+2	0.988177318360511\\
+6	0.973105474184538\\
+8	0.943161729758256\\
+10	0.923469473742935\\
+11.886	0.384911381559726\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.971348049171438\\
+2	0.979486679908768\\
+6	0.941169000223599\\
+8	0.916710542101121\\
+10	0.913485603905233\\
+11.886	0.381501351380386\\
+};
+\addplot [color=red,dotted,line width=2pt,forget plot]
+  table[row sep=crcr]{%
+0	1\\
+12	1\\
+};
+\end{axis}
+
+
+\begin{axis}[%
+width=2in,
+height=1in,
+at={(0in,-1.1in)},
+scale only axis,
+xmin=0,
+xmax=12,
+ymin=0.8,
+ymax=1.05,
+xlabel={Wing span (m)},
+ylabel={Loads (-)},
+ylabel style={yshift=-2mm},
+axis background/.style={fill=white}
+]
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.969312173045646\\
+2	0.961162377119108\\
+6	0.919692991088857\\
+8	0.854006884406522\\
+10	0.780949644872934\\
+11.886	0.317735862334183\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.957719192526862\\
+2	0.958444147829886\\
+6	0.890515465737695\\
+8	0.825111557190162\\
+10	0.771798076427794\\
+11.886	0.326551942910108\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.966601372316521\\
+2	0.959324076185709\\
+6	0.920727260792944\\
+8	0.855787017026899\\
+10	0.783188811903151\\
+11.886	0.330304988407101\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.954667210610152\\
+2	0.956600196849542\\
+6	0.891309055282913\\
+8	0.826104853547605\\
+10	0.774464336925926\\
+11.886	0.332872798910745\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.913796925010081\\
+2	0.9035157499405\\
+6	0.918566807103421\\
+8	0.897329472302156\\
+10	0.888575830820275\\
+11.886	0.463691747818475\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.958434196840019\\
+2	0.949645785578887\\
+6	0.901073245484319\\
+8	0.85900320569419\\
+10	0.83000078405022\\
+11.886	0.303603559131832\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.945548282633249\\
+2	0.945185311822117\\
+6	0.873581169370488\\
+8	0.835514309342157\\
+10	0.825330930895454\\
+11.886	0.312595343387493\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.906789891781454\\
+2	0.897947154043384\\
+6	0.916327364696962\\
+8	0.895442892018489\\
+10	0.886983838512448\\
+11.886	0.460895012399471\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.956575299819507\\
+2	0.9487874773213\\
+6	0.902259256101779\\
+8	0.859206265972067\\
+10	0.831990514918578\\
+11.886	0.312631558954843\\
+};
+\addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+1.35	0.942865490971114\\
+2	0.943818880349802\\
+6	0.873803983612665\\
+8	0.836813778179902\\
+10	0.827592346761979\\
+11.886	0.317705818391372\\
+};
+\addplot [color=red,dotted,line width=2pt,forget plot]
+  table[row sep=crcr]{%
+0	1\\
+12	1\\
+};
+\addplot [color=green,dotted,line width=2pt,forget plot]
+  table[row sep=crcr]{%
+0	0.97\\
+12	0.97\\
+};
+\end{axis}
+
+\end{tikzpicture}%

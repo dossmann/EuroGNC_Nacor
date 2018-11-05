@@ -416,8 +416,8 @@ First, to verify the disturbance estimator, the capability of estimating the gus
 	%\centering
 	\sidecaption[]
 	\input{gusts.tikz}
-	\caption{Gust estimates (\ref{lin:1}) on the 10 available trim points for a gust input (\ref{lin:ref}) with a wavelength of 27.5\,m (first diagram), 34.7\,m (second diagram), and 46\,m (third diagram) }
-	\label{fig:est}.
+	\caption{Gust estimates (\ref{lin:1}) on the 10 available trim points for a gust input (\ref{lin:ref}) with a wavelength of 27.5\,m (first diagram), 34.7\,m (second), and 46\,m (third). }
+	\label{fig:est}
 \end{figure}
 
 In the first diagram a common problem with the gust estimates is visible. A  delay between the gust inputs and the gust estimates is present specially for the fast gust inputs. This delay is the results of the sampling as well as the used sensors, i.e. the pitch rate and load factor. The gust input has already passed over some parts of the aircraft until its effect is visible in the sensors. For the slower gusts as depicted in the second and third diagram the same delay is present, however, as the gust themselves are slower, the actual responses look better.
@@ -426,18 +426,17 @@ Besides that, the actual estimates are rather good also in the non-linear simula
 
 Note that the baseline controller is active during all the simulations and counteracts the effect of the gust on the rigid body dynamics. This ensures that the aircraft is flying on its desired path although the gust encounter. Thus, for the gust estimator this can be interpreted as a robustness test, if the decoupling from the inputs is working. As visible in figure \ref{fig:est} the estimate are not influenced by these control inputs, which are active after about 0.75\,s simulation time. The gust estimate is close to zero at this point
 
-
-Finally, the loads on the wings are computed without gust load alleviation controller and with. For each of the 10 trim points five different gust wavelength are simulated and the accordant loads are recorded. The bending moment value for each trim point is depicted in figure \ref{fig:loads} in dependence of the wing position. The same procedure is repeated with the estimator and the feedback law activated.
-
 \begin{figure}[bth]
 	%\centering
 	\sidecaption[]
-	%\input{closedloop.tikz}
-	\caption{xxx. }
+	\input{loads.tikz}
+	\caption{Normalized loads without (diagram 1) and with (diagram 2) load alleviation system over the wing span for the 10 available trim points.}
 	\label{fig:loads}	
 \end{figure}
 
-Interpretation of results
+Finally, the loads on the wings are computed without gust load alleviation controller and with. For each of the 10 trim points five different gust wavelength are simulated and the loads are recorded. For each trim point the maximum bending moment values  encountered during the simulation over the five different gust wave length is depicted in figure \ref{fig:loads} in dependence of the wing position. The same procedure is repeated with the estimator and the feedback law activated and is depicted in the second diagram of figure \ref{fig:loads}.
+
+
 
 
 \section{Conclusions}
