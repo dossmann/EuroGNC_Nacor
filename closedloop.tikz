@@ -24,11 +24,11 @@ fill=black]
 \begin{tikzpicture}[blockdiag, auto, scale=0.8]
 
 % Blocks
-\node[block,minimum width=1.25cm, minimum height=1.5cm](Plant) {$AC$};
+\node[block,minimum width=1.25cm, minimum height=1.5cm](Plant) {$G$};
 \node[block, minimum width=1.25cm, minimum height=1cm,left=of Plant, xshift=-1.5cm, yshift=0.47cm] (C) {$C_\eta$};
-\node[block, minimum width=1.25cm, minimum height=1cm,below=of Plant,  yshift=0cm] (Obsv) {$O_e$};
-\node[block, minimum width=1cm, minimum height=.8cm,below=of Obsv,  yshift=-0.2cm] (logic) {$> \tau_{th}$};
-\node[block2, minimum width=1.25cm, minimum height=1cm,left=of Obsv, xshift=-1.5cm, yshift=0.5cm] (Cload) {$C_{LA}$};
+\node[block, minimum width=1.25cm, minimum height=1cm,below=of Plant,  yshift=0cm] (Obsv) {\textcolor{blue}{$O_e$}};
+%\node[block, minimum width=1cm, minimum height=.8cm,below=of Obsv,  yshift=-0.2cm] (logic) {$> \tau_{th}$};
+\node[block2, minimum width=1.25cm, minimum height=1cm,left=of Obsv, xshift=-1.5cm, yshift=0.5cm] (Cload) {\textcolor{blue}{$C_{\Delta \xi}$}};
 
 
 \node[connector2, right=of Plant, xshift = 0.65cm] (con1) {}; 
@@ -38,31 +38,31 @@ fill=black]
 \node[connector2, right=of C, xshift = 1cm] (con5) {}; 
 \node[connector, below=of Cload, xshift = -0.5cm, yshift = 0.2cm] (con6) {}; 
 \node[connector, above=of Cload, xshift = 0.5cm, yshift = -0.2cm] (con7) {}; 
-\node[connector, right=of Plant, xshift = 1.05cm, yshift = -0.5cm] (con8) {}; 
+\node[connector, right=of Plant, xshift = 0.1cm, yshift = -0.5cm] (con8) {}; 
+\node[connector, below=of Obsv, xshift = 0cm, yshift = -0.0cm] (con9) {}; 
 
-\draw[->]  (Plant.east) ++(0cm,0.6cm)  --  ++(1cm,0cm) node[pos=0.27,yshift=-1mm] {$q$} --  ++(0cm,1.75cm)   -- ++(-7cm,0cm) |- ($(C.west)+(0cm,0.3cm)$);
-\draw[->]  (Plant.east) ++(0cm,0cm)  --  ++(1.5cm,0cm) node[pos=0.27,yshift=-1mm] {$n_z$}  --  ++(0cm,2.75cm)   -- ++(-7.75cm,0cm) |- ($(C.west)+(0cm,-0.3cm)$);
+\draw[->]  (Plant.east) ++(0cm,0.6cm)  --  ++(1cm,0cm) node[pos=0.27,yshift=-1mm] {$q$} --  ++(0cm,1.60cm)  -| ($(C.north)+(0.4cm,0cm)$);
+\draw[->]  (Plant.east) ++(0cm,0cm)  --  ++(1.5cm,0cm) node[pos=0.27,yshift=-1mm] {$n_z$}  --  ++(0cm,2.60cm)   -|  ($(C.north)-(0.4cm,0cm)$);
 
-\draw[->]  (Cload.east) ++(0cm,0.3cm)  --  ++(1.0cm,0cm) node[pos=0.35,yshift=-1mm] {$\xi_i$}    |- ($(Plant.west)+(0cm,0cm)$);
-\draw[->]  (Cload.east) ++(0cm,-0.3cm)  --  ++(1.5cm,0cm) node[pos=0.27,yshift=-1mm] {$\xi_o$}    |- ($(Plant.west)+(0cm,-0.6cm)$);
+\draw[->]  (Cload.east) ++(0cm,0.3cm)  --  ++(1.0cm,0cm) node[pos=0.39,yshift=-.5mm] {\textcolor{blue}{$\Delta \xi_i$}}    |- ($(Plant.west)+(0cm,0cm)$);
+\draw[->]  (Cload.east) ++(0cm,-0.3cm)  --  ++(1.5cm,0cm) node[pos=0.29,yshift=-.5mm] {\textcolor{blue}{$\Delta  \xi_o$}}    |- ($(Plant.west)+(0cm,-0.6cm)$);
 
 \draw[->]  (C)  --  ($(Plant.west)+(0cm,0.59cm)$)node[pos=0.13]{$\eta$};
-\draw[->]   (Obsv.south) -- (logic) node[pos=0.4]{$\tilde d$} ;
-\draw[<-] (Plant.north) -- +(0cm, +1cm)node[left, pos=.7]{$d$};
+\draw[->]   (con9) -| (Cload.south);
+\draw[<-, color=red] (Plant.north) -- +(0cm, +1cm)node[left, pos=.7]{\textcolor{red}{$d$}};
 
-\draw[->]  (con1)  |-  ($(Obsv.east)+(0cm,-0.3cm)$);
-\draw[->]  (con2)  |-  ($(Obsv.east)+(0cm,0.3cm)$);
+\draw[->]  (con1)  |-  ($(Obsv.east)+(0cm,-0.5cm)$);
+\draw[->]  (con2)  |-  ($(Obsv.east)+(0cm,0cm)$);
+\draw[->]  (con8)  |-  ($(Obsv.east)+(0cm,+0.5cm)$);
+
 
 \draw[->]  (con5)  |-  ($(Obsv.west)+(0cm,0.5cm)$);
 \draw[->]  (con4)  |-  ($(Obsv.west)+(0cm,0cm)$);
 \draw[->]  (con3)  |-  ($(Obsv.west)+(0cm,-0.5cm)$);
-\draw[-]  (logic.west) -| (con6)node[pos=0.04, above]{$i$} ;
 
-\begin{pgfonlayer}{bg}    % select the background layer
-        \draw[->]  (con6) -- (con7);
-\end{pgfonlayer}
 
-\draw[-]  (Plant.east)++(0cm,-0.625cm)   --  (con8)node[pos=0.15,yshift=-1mm] {$\alpha$};
-\draw[->]  (con8)  -- ++(0.0cm,-4.5cm)  -- ++(-8.5cm,0cm)  |-  (Cload.west);
+\draw[-]  (con9)  --  (Obsv)node[pos=0.75,yshift=-1mm] {\textcolor{blue}{$\tilde d$}};
+\draw[-]  (Plant.east)++(0cm,-0.625cm)   --  (con8)node[pos=0.4,yshift=-.5mm] {$\alpha$};
+%\draw[->]  (con8)  -- ++(0.0cm,-4.5cm)  -- ++(-8.5cm,0cm)  |-  (Cload.west);
 
 ;\end{tikzpicture} 
