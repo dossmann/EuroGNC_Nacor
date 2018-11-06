@@ -4,6 +4,9 @@
 %  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
 %where you can also make suggestions and rate matlab2tikz.
 %
+
+\definecolor{mycolorx1}{rgb}{0,0.7,0.3}%
+\definecolor{mycolorx2}{rgb}{0.85,0,0}%
 \begin{tikzpicture}
 
 \begin{axis}[%
@@ -18,7 +21,7 @@ ymin=0.8,
 ymax=1.03,
 ylabel={Loads (-)},
 xtick={\empty},
-ylabel style={yshift=-2mm},
+ylabel style={yshift=-3mm},
 axis background/.style={fill=white}
 ]
 \addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
@@ -111,7 +114,7 @@ axis background/.style={fill=white}
 10	0.913485603905233\\
 11.886	0.381501351380386\\
 };
-\addplot [color=red,dotted,line width=2pt,forget plot]
+\addplot [color=mycolorx2,dotted,line width=2pt,forget plot]
   table[row sep=crcr]{%
 0	1\\
 12	1\\
@@ -130,7 +133,7 @@ ymin=0.8,
 ymax=1.05,
 xlabel={Wing span (m)},
 ylabel={Loads (-)},
-ylabel style={yshift=-2mm},
+ylabel style={yshift=-3mm},
 axis background/.style={fill=white}
 ]
 \addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]
@@ -223,16 +226,21 @@ axis background/.style={fill=white}
 10	0.827592346761979\\
 11.886	0.317705818391372\\
 };
-\addplot [color=red,dotted,line width=2pt,forget plot]
+\addplot [color=mycolorx2,dotted,line width=2pt,forget plot]
   table[row sep=crcr]{%
 0	1\\
 12	1\\
 };
-\addplot [color=green,dotted,line width=2pt,forget plot]
+\addplot [color=mycolorx1,dotted,line width=2pt,forget plot]
   table[row sep=crcr]{%
 0	0.97\\
 12	0.97\\
 };
+% \addplot [color=mycolorx1,dotted,line width=2pt,forget plot]
+%   table[row sep=crcr]{%
+% 0	0.9\\
+% 12	0.9\\
+% };
 \end{axis}
 
 \end{tikzpicture}%
