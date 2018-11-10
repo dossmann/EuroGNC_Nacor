@@ -26,7 +26,7 @@ fill=black]
 % Blocks
 \node[block,minimum width=1.25cm, minimum height=1.5cm](Plant) {$G$};
 \node[block, minimum width=1.25cm, minimum height=1cm,left=of Plant, xshift=-1.5cm, yshift=0.47cm] (C) {$C_\eta$};
-\node[block, minimum width=1.25cm, minimum height=1cm,below=of Plant,  yshift=0cm] (Obsv) {\textcolor{blue}{$O_e$}};
+\node[block, minimum width=1.25cm, minimum height=1cm,below=of Plant,  yshift=0cm] (Obsv) {\textcolor{blue}{$O$}};
 %\node[block, minimum width=1cm, minimum height=.8cm,below=of Obsv,  yshift=-0.2cm] (logic) {$> \tau_{th}$};
 \node[block2, minimum width=1.25cm, minimum height=1cm,left=of Obsv, xshift=-1.5cm, yshift=0.5cm] (Cload) {\textcolor{blue}{$C_{\Delta \xi}$}};
 
