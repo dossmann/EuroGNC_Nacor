@@ -215,8 +215,8 @@ Note that in (\ref{eq:rdep}) an approximated form is used, i.e. the estimate sha
 \subsection{Solving the robust disturbance estimation problem}\label{sec:rdep}
 The design of the robust disturbance estimator $O(s)$ which allows the estimation of the gust for all $N$ models is done in two steps. In the first step the structure of the disturbance estimator is determined, solving a dedicated disturbance estimation problem (DEP) for each model independently. In the second step this structure is extracted and used within an optimization algorithm to determine the optimal parameter ensuring the required conditions $(a)$ and $(b)$.
 
-\subsubsection{Estimator Structure}\label{sec:strc}
-The structure of the disturbance estimator is determined by solving the DEP \cite{Ossmann18ccta} for each model individually. In this case the computation relies on advanced nullspace techniques \cite{}. Let us first consider the $i^{\text{th}}$-model  for which the  $i^{\text{th}}$- disturbance  estimator 
+\subsubsection{Estimator structure}\label{sec:strc}
+The structure of the disturbance estimator is determined by solving the DEP \cite{Ossmann18ccta} for each model individually. In this case the computation relies on advanced nullspace techniques \cite{Varga17}. Let us first consider the $i^{\text{th}}$-model  for which the  $i^{\text{th}}$- disturbance  estimator 
 \begin{equation}\label{eq:estr}
 \tilde d^{(i)}(s) =  O^{(i)}
 \begin{bmatrix}
@@ -268,7 +268,7 @@ The required nullspace computation in (\ref{eq:ns})  can  be solved readily avai
 At this point of the design approach, the DEP has been solved for each of the $N$ models individually. As the underlying models often exhibit the same model structure, a common filter structure can be extracted. In words, if a specify entry
 of the $N$ state space matrices features the same value over all $N$ models (e.g. 0), this value is kept constant during the optimization process of the robust estimator, reducing the complexity of the proposed optimization.
 
-\subsubsection{Parameter Tuning}\label{sec:tuning}
+\subsubsection{Parameter tuning}\label{sec:tuning}
 Having defined the structure and the free parameters $K$ of the estimator $O(s)$ in (\ref{eq:est}), the net task is to optimally tune these free parameters $K$ of the estimator. As criteria a $H_\infty$ norm optimization is selected for which numerical tools in \matlab are available. The disturbance estimator shall ensure the conditions defined in (\ref{eq:rdep}). The goal is to design a single estimator which decouples the control inputs and the noise for all $N$ models. As this can seldom be solved exactly, i.e. the decoupling condition (\ref{eq:ns}) cannot be fulfilled for all N models with a single estimator, we use the reformulation of the problem based on the $H_\infty$ norm. Thus, the decoupling requirement $(a)$ is expressed as  multi-model norm condition for  $i=1,\dots,N$ by
 \begin{equation}\label{eq:rc1}
 ||O(s) \, G_e^{(i)}(s) ||_\infty  \,\approx 0.
@@ -408,7 +408,7 @@ For this paper, constant gains between 0.75 and 1.5 have been selected for $k_{\
 
 
 \textcolor{red}{
-\subsection{Stability Assessment}\label{APPsubsec:stab}
+\subsection{Stability assessment}\label{APPsubsec:stab}
 Charles with results from the benchmark
 }
 
