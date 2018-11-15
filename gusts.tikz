@@ -1533,7 +1533,7 @@ axis background/.style={fill=white}
 \begin{axis}[%
 width=2in,
 height=0.80in,
-at={(0in,-.95in)},
+at={(0in,-.91in)},
 scale only axis,
 xmin=0.75,
 xmax=2,
@@ -3043,7 +3043,7 @@ axis background/.style={fill=white}
 \begin{axis}[%
 width=2in,
 height=0.80in,
-at={(0in,-1.9in)},
+at={(0in,-1.82in)},
 scale only axis,
 xmin=0.75,
 xmax=2,
@@ -3052,6 +3052,7 @@ xtick = {0.75,1,1.25,1.5,1.75,2,2.25},
 xticklabels= { 0,0.25,0.5,0.75,1,1.25,1.5},
 ymax=4,
 xlabel={Time (s)},
+xlabel style={yshift=+1mm},
 ylabel={$d$, $\tilde d$ (deg)},
 ylabel style={yshift=-2mm},
 axis background/.style={fill=white}

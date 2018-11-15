@@ -125,7 +125,7 @@ axis background/.style={fill=white}
 \begin{axis}[%
 width=2in,
 height=1in,
-at={(0in,-1.1in)},
+at={(0in,-1.05in)},
 scale only axis,
 xmin=0,
 xmax=12,
@@ -134,6 +134,7 @@ ymax=1.05,
 xlabel={Wing span (m)},
 ylabel={Loads (-)},
 ylabel style={yshift=-3mm},
+xlabel style={yshift=2mm},
 axis background/.style={fill=white}
 ]
 \addplot [color=black,solid,line width=1.2pt,mark=o,mark options={solid},forget plot]

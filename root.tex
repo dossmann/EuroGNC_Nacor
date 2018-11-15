@@ -28,7 +28,7 @@
 
 \usepackage{amsmath, amssymb, bm} % from knoblach without amsthm
 \usepackage{graphicx}
-\usepackage{algorithm}
+\usepackage{algorithm,algorithmic}
 \usepackage{xcolor}
 %\newtheorem{theorem}{Theorem}
 %\newtheorem{lemma}{Lemma}
@@ -70,20 +70,19 @@
 
 %\abstract*{Each chapter should be preceded by an abstract (10--15 lines long) that summarizes the content. The abstract will appear \textit{online} at \url{www.SpringerLink.com} and be available with unrestricted access. This allows unregistered users to read the abstract as a teaser for the complete chapter. As a general rule the abstracts will not appear in the printed version of your book unless it is the style of your particular book or that of the series to which your book belongs. Please use the 'starred' version of the new Springer \texttt{abstract} command for typesetting the text of the online abstracts (cf. source file of this chapter template \texttt{abstract}) and include them with the source files of your manuscript. Use the plain \texttt{abstract} command if the abstract is also to appear in the printed version of the book.}
 
-\abstract{	In this work the design and assessment of a two degree of freedom gust load alleviation  control system for a generic business jet aircraft is presented. The two degrees of freedom are a disturbance estimator to compute the incoming gusts as well as a feedback control law to mitigate the estimated disturbance to reduce the aircraft loads. High order models of the structural and aerodynamic aircraft dynamics featuring various time delays are approximated by low order models using an advanced model reduction technique for the estimator design. For the robust disturbance estimator design a novel approach relying on nullspace based  techniques together with  non-linear optimizations is proposed. The time delays in the aircraft model play a key role in the stability assessment of the closed loop. An analytical analysis method is presented  to explicitly analyze the stability of the closed loop system against the time delays present in the feedback loop.
-The developed tool-chain is applied to a fly-by-wire business jet. The resulting gust load alleviation control system is verified in a high fidelity non-linear simulation model of the considered aircraft.}
+\abstract{The design and assessment of a two degree of freedom gust load alleviation control system for a business jet aircraft is presented in this paper. The two degrees of freedom are a disturbance estimator to compute the incoming gusts as well as a feedback control law to mitigate the estimated disturbance to reduce the aircraft loads. To facilitate the estimator design, high order, infinite models of the structural and aerodynamic aircraft dynamics are approximated by low order models using advanced model reduction techniques. For the robust disturbance estimator design an innovative approach relying on nullspace based techniques together with non-linear optimizations is proposed. Time delays, originating from the aerodynamics modeling, the discrete control loop, and the sensor and actuator dynamics, play a key role in the stability and performance assessment of a gust load alleviation controller. Thus, a novel analytical analysis method is presented to explicitly evaluate the influence of these time delays on the closed loop. Finally, the developed tool-chain is applied to a fly-by-wire business jet aircraft. The resulting two degree of freedom gust load alleviation system is verified in a simulation campaign using a closed loop, non-linear simulator of the aircraft.}
 
 
 
 \section{Introduction}
 
 In order to allow for a more economic and environmentally friendly aircraft operation and to fulfill the greener imperative demanded by today's society, fuel savings and cost reduction play a key role in the development of modern aircraft. Besides the efficiency of engines and aerodynamics, the aircraft weight has a major impact on fuel consumption \cite{IEA2009}. 
-Thus, reducing structural loads on an aircraft by using advanced active control techniques is a main research interest of today's aircraft industry. Reducing the loads allows the aircraft manufacturer to build and certify \cite{FAA15} the aircraft for a smaller load envelope, which inherently reduces the structure of the aircraft and reduced fuel and costs, see \cite{Johnston79} for a realistic example.
-The loads itself arise from steering the aircraft (maneuver loads) and from external disturbance inputs, (gust loads). Considering new
-aircraft configurations with improved lift-to-drag ratios, a special focus is put on gust load alleviation, as these aircraft are prone to have an increased sensitivity to atmospheric disturbances. A well written overview of currently gust load alleviation approaches and aircraft featuring  active gust load alleviation systems is provided in \cite{Regan12}.
-Besides the design of  active control systems for a given aircraft configuration other approaches of reducing the gust loads are focused on the actual aircraft design process itself. In these approaches the load alleviation system is included in the aircraft design \cite{Livne99}. Such approaches can be, for example, based on  multidisciplinary design optimization, where aircraft structure and load controller are designed together (see, e.g., \cite{Xu14}), or the  placement \cite{Pusch2015} and allocation \cite{Pusch2017} of multifunctional control surfaces to reduce the loads.
+Thus, reducing structural loads on an aircraft by using advanced active control techniques is a main research interest of today's aircraft industry. Reducing the loads allows the aircraft manufacturer to build and certify \cite{FAA15} the aircraft for a smaller load envelope, which inherently reduces the structure of the aircraft and reduced fuel and costs, see \cite{Johnston79} for a realistic example. The loads itself arise from steering the aircraft (maneuver loads) and from external disturbance inputs, (gust loads). Considering new aircraft configurations with improved lift-to-drag ratios, a special focus is put on gust load alleviation, as these aircraft are prone to have an increased sensitivity to atmospheric disturbances. A well written overview of currently gust load alleviation approaches and aircraft featuring  active gust load alleviation systems is provided in \cite{Regan12}.
 
-Due to the complexity of an aircraft design the development of the gust load alleviation control system mostly remains a separate task. Thus, in this paper we present a tool chain to develop a two degree of freedom gust load alleviation system for a given aircraft configuration to reduce the gust loads. The gust load alleviation controller features a disturbance estimator to estimate the incoming gusts and a dedicated controller to reduce the gust effects. A main difference between a classical flight  control design and the design of a gust load alleviation system is, that for the latter usually complex, high order models are available, which allow the determination of the forces and moments on the  aircraft structure. Such models need to include detailed descriptions on the structure of the aircraft and steady and unsteady aerodynamics, leading to high order models. As the aircraft structure is often derived in sections to better reflect the impact of the gust moving along the aircraft, time delays are included in the model. For the control design these complex models are not well suited. Thus, in section \ref{sec:mr} a method to approximate  these infinite dimensional models by low order finite dimensional models is presented. In section \ref{sec:th} an advanced approach to design a robust disturbance estimator, which is robust to parametric uncertainties in the flight envelope, is proposed.
+%Besides the design of  active control systems for a given aircraft configuration other approaches of reducing the gust loads are focused on the actual aircraft design process itself. In these approaches the load alleviation system is included in the aircraft design \cite{Livne99}. Such approaches can be, for example, based on  multidisciplinary design optimization, where aircraft structure and load controller are designed together (see, e.g., \cite{Xu14}), or the  placement \cite{Pusch2015} and allocation \cite{Pusch2017} of multifunctional control surfaces to reduce the loads.
+%Due to the complexity of an aircraft design the development of the gust load alleviation control system mostly remains a separate task. Thus, 
+
+In this paper we present a tool chain to develop a two degree of freedom gust load alleviation system for a given aircraft configuration to reduce the gust loads. The gust load alleviation controller features a disturbance estimator to estimate the incoming gusts and a dedicated controller to reduce the gust effects. A main difference between a classical flight  control design and the design of a gust load alleviation system is, that for the latter usually complex, high order models are available, which allow the determination of the forces and moments on the  aircraft structure. Such models need to include detailed descriptions on the structure of the aircraft and steady and unsteady aerodynamics, leading to high order models. As the aircraft structure is often derived in sections to better reflect the impact of the gust moving along the aircraft, time delays are included in the model. For the control design these complex models are not well suited. Thus, in section \ref{sec:mr} a method to approximate  these infinite dimensional models by low order finite dimensional models is presented. In section \ref{sec:th} an advanced approach to design a robust disturbance estimator, which is robust to parametric uncertainties in the flight envelope, is proposed.
 As the time delays are approximated in section \ref{sec:mr}, a dedicated stability analysis to assess the developed gust load alleviation system against these delays is derived in section \ref{sec:st}. This intermediate step is to be performed before the classical verification of the gust load alleviation system in simulation. Figure \ref{fig:toolchain} summarizes the proposed  tool-chain  with the  herein presented novel design techniques (highlighted in bold).  The presented toll-chain is applied to develop a gust load alleviation controller for a generic example of a medium size business jet in section \ref{sec:app}. The latest  results of a simulation-based load verification campaign including the comparison to  the loads  without  the gust load alleviation control are reported.
 
 \begin{figure}[bth]
@@ -100,7 +99,7 @@ As the time delays are approximated in section \ref{sec:mr}, a dedicated stabili
 
 \section{Model approximation}\label{sec:mr}
 
-When dealing with industrial problems such as aircraft systems, associated models usually embed unsteady aerodynamics as well as structural modes and aerodynamical delays. Consequently, the dimension of the  state-space dimensions can be very large, and additionally models can include delays and potentially mixing differential and algebraic equations. Thus, before the methods presented in section \ref{sec:th} can be applied, a pre-processing step, to reduce the state dimension and simplify the complexity should be first applied in order to improve the numerical treatment and accuracy of the results. A short reminder of the methods involved in section \ref{sec:app} are briefly discussed in this section. As these methods are not the main topic of this paper, more details on infinite or data-driven model approximation techniques can be found in \cite{AntoulasSurvey:2016,DalmasECC:2016,Meyer:2016}, and on finite order large-scale model approximation in \cite{AntoulasBook:2005,GugercinSIAM:2008}.  Let us follow these two classes of problems and remind the driving ideas as follows.
+When dealing with industrial problems such as aircraft systems, associated models usually embed unsteady aerodynamics as well as structural modes and aerodynamical delays. Consequently, the dimension of the  state-space dimensions can be very large, and additionally models can include delays and potentially mixing differential and algebraic equations. Thus, before the methods presented in section \ref{sec:th} can be applied, a pre-processing step, to reduce the state dimension and simplify the complexity should be first applied in order to improve the numerical treatment and accuracy of the results. A short reminder of the methods involved in section \ref{sec:app} are discussed in this section. As these methods are not the main topic of this paper, more details on infinite or data-driven model approximation techniques can be found in \cite{AntoulasSurvey:2016,DalmasECC:2016}, and on finite order large-scale model approximation in \cite{AntoulasBook:2005,GugercinSIAM:2008}.  Let us follow these two classes of problems and remind the driving ideas as follows.
 
 \subsection{Infinite  dimensional or data-driven model approximation}\label{sec:app_a}
 
@@ -262,11 +261,10 @@ G_{d}^{(i)}(s)  \\  0
 \neq  0
 \end{equation}
 must be fulfilled to ensure the estimate-ability of the disturbance. If or not the DEP in (\ref{eq:ns}) and (\ref{eq:c2}) can be solved exactly is based on  necessary and sufficient rank criteria. As for realistic design problems this condition is often fulfilled, it is nor further discussed herein. Interested readers are referred to \cite{Var09, Ossmann18ccta, Varga17}.
-
 The required nullspace computation in (\ref{eq:ns})  can  be solved readily available using numerical tools \cite{Varga17}. If the DEP is solvable, a disturbance estimator can be constructed from the nullspace basis ensuring (\ref{eq:c2}) as well as the minimal order of the resulting estimator. In this design procedure, the actual dynamics of the estimator are a design freedom, i.e. the poles of the filter can be freely chosen.
 
-At this point of the design approach, the DEP has been solved for each of the $N$ models individually. As the underlying models often exhibit the same model structure, a common filter structure can be extracted. In words, if a specify entry
-of the $N$ state space matrices features the same value over all $N$ models (e.g. 0), this value is kept constant during the optimization process of the robust estimator, reducing the complexity of the proposed optimization.
+At this point of the design approach, the DEP has been solved for each of the $N$ models individually. As the underlying models often exhibit the same model structure, a common estimator structure often can be extracted, reducing the complexity of the  optimization described next. 
+
 
 \subsubsection{Parameter tuning}\label{sec:tuning}
 Having defined the structure and the free parameters $K$ of the estimator $O(s)$ in (\ref{eq:est}), the net task is to optimally tune these free parameters $K$ of the estimator. As criteria a $H_\infty$ norm optimization is selected for which numerical tools in \matlab are available. The disturbance estimator shall ensure the conditions defined in (\ref{eq:rdep}). The goal is to design a single estimator which decouples the control inputs and the noise for all $N$ models. As this can seldom be solved exactly, i.e. the decoupling condition (\ref{eq:ns}) cannot be fulfilled for all N models with a single estimator, we use the reformulation of the problem based on the $H_\infty$ norm. Thus, the decoupling requirement $(a)$ is expressed as  multi-model norm condition for  $i=1,\dots,N$ by
@@ -288,25 +286,137 @@ P_{\min} < P < P_{\max},
 for $i=1,\dots,N$, where $P_{\min}$ and $P_{\max}$ are the minimum and maximum values of the tuning parameters and $\gamma$ is a parameter to define the accuracy of the disturbance estimate. The optimization problem in (\ref{eq:opt}) can be  solved numerically using standard Matlab tools as for example the \texttt{systune} command.
 
 
-\textcolor{red}{
+
 \section{Stability assessment}\label{sec:st}
-Charles with some theory about the assessment
-}
+
+As mentioned in section \ref{sec:mr}, the considered aircraft models naturally embed internal as well as input and output delays. Looping outputs to inputs through an observer/controller structure then leads to dynamical models with  numerous delays. It is preferred, however, to work on a finite-order approximated model $\hat H$ for the estimator and control law design as is allows the use of standard numerical tools. Obviously is is better to assess the closed-loop stability on the original \textit{delayed} model before running numerous simulations.
+Depending on the number of delays and states equations describing the model, this assessment can become complicated. Up to the authors' knowledge, no  standard tools are available to explicitly consider this analysis problem. Thus, in this section we propose a procedure (with partial theoretical proof) to approximate the stability of a large-scale multiple-delay dynamical equations. 
+
+\subsection{Preliminaries and proposed algorithm }
+
+Stability of a dynamical systems is clearly one of the main property to assess in control theory, numerical simulation, optimization, etc. Without loss of generalities, in the case of "classical"\footnote{By "classical", ones means equipped with the $(E,A,B,C,D)$ realization.} linear time-invariant (LTI) models either described by a set of ordinary differential equations or differential algebraic equations, the stability problem is recast as  eigenvalue problem. In this specific case, the number of eigenvalues is finite and its computational complexity is only related to the $(E,A)$ pencil calculation\footnote{In this case, very efficient tools already exist such as LAPACK.}. If instead, the LTI model $H$ has an infinite number of singularities or its realization is not necessarily available, the stability assessment becomes much more tedious. Delay invariant models fall within this category. In these cases, tailored solutions are usually invented to deal with these specificity (\eg the time-delay stability analysis literature is very important and one may refer to \cite{Richard:2003,Sipahi:2011,Seuret:2015,BriatBook:2015}).  Let us start by noticing that, delayed equations are meromorphic (real-valued) complex functions given as $H :  \Cplx \mapsto   \Cplx^{n_y\times n_u}$. Moreover, if $H$ ensures 
+\begin{eq}
+	\int_{-\infty}^\infty  \norm{H(s)}_F^2 dt <\infty,
+\end{eq}
+the meromorphic function is said to be of finite energy and $H\in\Ltwo$. Then, let us define the input-output stability as follows: a system represented by the transfer function $H(s)$ is said to be input-output $L_{\infty} - L_{2}$ stable, if there exists a $c>0$ such that: 
+\begin{eq}
+	\norm{H u}_{L_\infty} =  \norm{y}_{L_\infty} \leq  c \norm{u}_{L_2}.
+\end{eq}
+In this case, the system is said $\Ltwo$ stable (or $\Htwo$). This consideration, i.e. the complex-valued meromorphic function context, is the starting point for the proposed approach.
+The corresponding proposed numerical procedure, summarized in algorithm \ref{algo:MFSA} below, embeds a relative simple but   effective, fast and reliable procedure. In the algorithm \ref{algo:MFSA} we first exactly match the original input-output model by a rational model $\tilde H\in\Ltwo$ which guarantees interpolatory conditions. Then, we seek for the best stable approximation $\tilde H_s\in\Htwo$ of the obtained model $\tilde H \in\Ltwo$. The $\Ltwo$ distance (inner product) between the interpolated $\tilde H$ and stable $\tilde H_s$ models is computed next. If this stability index is smaller than a given threshold, then one concludes that $\tilde H$ (and consequently $H$) is stable, and unstable otherwise. 
+In the following section we derive some arguments to justify the approach. The author stress, however, that detailed proves  are not fully available yet and are subject of ongoing research. 
+\vspace{-.2cm}
+
+\begin{algorithm}[h]
+	\caption{$\Ltwo$ - Meromorphic Function Stability Approximation (\mfsa) } \label{algo:MFSA} 
+	\begin{algorithmic}[1]
+		\REQUIRE $H\in\Ltwo$, $\{\omega_i\}_{i=1}^N \in \Real_+$, $N\in \mathbb N$ and $\epsilon\in\Real_+$
+		\STATE Sample $H$ and obtain $\{\omega_i, \Phi_i\}_{i=1}^N$
+		\STATE Perform an exact Loewner interpolation (as described in section \ref{sec:mr}) and obtain $\tilde H$ equipped with a realization and which ensures interpolatory conditions
+		\STATE Compute $\tilde H_s$ , the stable rational approximation of $\tilde H$, following \cite{Kohler:2014} 
+		\STATE Compute the stability index as $S=\norm{\tilde H_s-\tilde H}_{\Ltwo}$
+		\IF{$S<\epsilon$}
+		\STATE $H$ is stable
+		\ELSE
+		\STATE $H$ is unstable
+		\ENDIF
+	\end{algorithmic}
+\end{algorithm}
+
+\vspace{-.8cm}
+
+\subsection{Reminding remarks on stability based the $\Ltwo$ inner product}
+
+Let us consider a linear multiple-input multiple-output dynamical system, denoted by $H$ with $n_u$ (\emph{resp.} $n_y$) $\in\mathbb{N}^{\ast}$ inputs (\emph{resp.} outputs), represented by its transfer function $h(s)\in \Cplx^{n_y\times n_u}$. Let $\Ltwo(\imath\Real)$ be the Hilbert space of holomorphic functions ${F}:~\Cplx\rightarrow \Cplx^{\nynu}$ which are analytic in the complex plane except on the imaginary axis and for which $\int_{-\infty}^{+\infty}\trace\left(\overline{ F(\imath\omega)} F^T(\imath\omega)\right)d\omega<+\infty.$ 
+For given $G,H\in{\Ltwo(\imath\Real)}$, the associated inner-product reads: 
+\begin{eq}
+	\langle G,H\rangle_{\Ltwo} =\frac{1}{2\pi}\int_{-\infty}^{+\infty}\trace\left(\overline{G(\imath\omega)}H^{T}(\imath\omega)\right)d\omega,
+	\label{eq:in_productH2}
+\end{eq}
+and the $\Ltwo(\imath\Real)$ norm can be  explained:
+\begin{eq}
+	\norm{{G}}_{\Ltwo}=\left(\frac{1}{2\pi}\int_{-\infty}^{+\infty}\|{G}(\imath\omega)\|^{2}_{F}d\omega\right)^{1/2}=\langle{G},{G}\rangle_{\mathcal{H}_{2}},
+\end{eq}
+where $\norm{{G}}_{F}^{2}=\langle{G},{G}\rangle_{F}$ and $\langle{G},{H}\rangle_{F}=\trace(\overline{{G}}{H}^{T})$ are the Frobenius norm and inner-product, respectively. Since real  dynamical systems are considered only, it is noteworthy that if ${G},{H}\in \Ltwo$ are real, then $ \langle{G},{H}\rangle_{\Ltwo}= \langle{H},{G}\rangle_{\Ltwo}\in{\Real_+}$. By noticing that $\Htwo(\Cplx_-)$ is the  left half-plane analog of $\Htwo(\Cplx_+)$, \eg, $G \in \Htwo(\Cplx_-)$ if and only if $G(-s) \in \Htwo(\Cplx_+)$. Then $\Htwo(\Cplx_-)$ stands as the space of transfer function $H(s)$  whose all the singularities lies in $\Cplx_+$, \ie the poles of $H(s)$ are all unstable. The space $\Htwo(\Cplx_-)$ is called the space of anti-stable models. Now, let us remind the following results, on which we ground the result derivation. The $\Htwo(\Cplx_-)$ and $\Htwo(\Cplx_+)$ spaces are closed subspaces of $\Ltwo(\imath\Real)$ and $\Ltwo(\imath\Real)=  \Htwo(\Cplx_-)\bigoplus \Htwo(\Cplx_+)$.
+In addition, one can remind that by applying the Laplace transform, denoted as $\mathcal L(\cdot)$, over these two spaces, the following bijections are obtained:
+\begin{eq}
+	\mathcal L(\cdot) : \mathcal L_2^n[0,\infty) \rightarrow \mathcal{H}_2(\Cplx_+) \text{~and~}
+	\mathcal L(\cdot) : \mathcal L_2^n(-\infty,0] \rightarrow \mathcal{H}_2(\Cplx_-),
+	\label{eq-Stability:laplaceEquivalence}
+\end{eq}
+which maps the causal and anti-causal time-domain functions. Obviously, \eqref{eq-Stability:laplaceEquivalence} shows that every element $H\in \Htwo(\Cplx_+)$ (respectively ${G}\in \Htwo(\Cplx_-)$ ) can be uniquely associated to an element  $h \in \mathcal L_2^n[0,\infty)$ (respectively $g \in L_2^n(-\infty,0] $). In addition, the following functional analysis theorem shows that the Laplace transform preserves inner product and orthogonality.
+
+\begin{theorem}[Plancherel] \label{thm:Stability-Plancherel}
+	Let us consider $ h_1,  h_2 \in \mathcal L^n_2(-\infty,\infty)$, one has
+	\begin{eq}
+		\langle H_1 , H_2 \rangle_{\Ltwo(\imath\Real)}=  \langle  \mathcal L(h_1) , \mathcal L ( h_2)\rangle_{\Ltwo(\imath\Real)} = \langle  h_1 ,  h_2\rangle_{L_2}.
+	\end{eq}
+	Moreover, since $\Htwo(\Cplx_-)$ is orthogonal to $\Htwo(\Cplx_+)$ with respect to the $\Ltwo(\imath\Real)$-inner product, if $H_s \in \Htwo(\Cplx_+)$ and $H_a = \Htwo(\Cplx_-)$, $\langle H_s, H_a \rangle_{\Ltwo(\imath\Real)} =0$.
+\end{theorem}
+In other words, the above decomposition and Theorem \ref{thm:Stability-Plancherel} state that given a model $H\in\Ltwo(\imath\Real)$, there is a stable model  $H_s \in \Htwo(\Cplx_+)$ and an anti-stable model  $H_a = \Htwo(\Cplx_-)$ such that $H = {H}_s +H_a$ and $\langle H_s, H_a \rangle_{\Ltwo(\imath\Real)} =0$. Then the following proposition holds.
+
+\begin{proposition}[Input-output $L_\infty - L_2$ stability]
+	A system $H \in \Ltwo(\imath\Real)$  is (input-output $L_\infty - L_2$) stable if and only if 
+	$H\in \Htwo(\Cplx_+)$. 
+\end{proposition}
+The Parenchel's Theorem and the $\Ltwo(\imath\Real)$ space decomposition are the main ingredient for the proposed \mfsa procedure. These arguments are now provided in the following subsection.
+
+\subsection{Theoretical \mfsa oriented arguments}
+
+The proposed arguments are based on the results stated in \cite{PontesECC:2015} and recalled in Propositions \ref{propStability:ortho}, \ref{propStability:stable} and \ref{propStability:unstable}, and finally in Theorem \ref{thmStability:Thm1}, providing the basis for the proposed numerical procedure. First of all, let us assume that the global minimizer $\tilde H$ of the $\Htwo(\Cplx_+)$ and $\Htwo(\Cplx_-)$ approximation problems exist\footnote{The $\Htwo(\Cplx_+)$ approximation problem is simply the $\Htwo$ one, while the $\Htwo(\Cplx_-)$ stand as the same one but for $H(-s)$.}. Then, the following first result holds true.
+
+\begin{proposition}[$\Ltwo$ orthogonality \cite{PontesECC:2015}] \label{propStability:ortho}
+	If $H\in \Htwo(\Cplx_+)$ and there exists a global minimizer $\tilde H\in \Ltwo(\imath\Real)$ of the $\Ltwo$ approximation problem, then $\tilde H\in \Htwo(\Cplx_+)$. 
+	Similarly, if $H\in \Htwo(\Cplx_-)$ and there exists a global minimizer $\tilde H\in \Ltwo(\imath\Real)$ of the $\Ltwo$ approximation problem, then $\tilde H\in \Htwo(\Cplx_-)$.
+\end{proposition}
+Thus, if a system $H$ is stable, then the global minimizer $\tilde H$ of $\Ltwo$ approximation problem is stable too. In the same way, if a system $H$ is anti-stable, \ie all its singularities are unstable, then the global minimizer $\tilde H$ of the $\Ltwo$ problem is anti-stable as well. This result comes from the orthogonality property of $\Htwo(\Cplx_-)$ and $\Htwo(\Cplx_+)$ spaces. 
+
+Let us now denote by $\tilde H_k$, the sequence of models of order $k$ and consider the case where the initial  model $H$ is stable, then the following propositions hold:
+
+\begin{proposition}[Unstable approximate sequence of stable model \cite{PontesECC:2015}] \label{propStability:stable}
+	Given a stable model $H\in  \Htwo(\mathbb{C_+})$, there exists a sequence of $k$-th order unstable models $\tilde H_k\in \Ltwo(\imath\Real)\backslash \Htwo(\Cplx_+)$, $k\in \mathbb{N}^*$, such that, when $k\rightarrow \infty$,
+	$\norm{H-\tilde H_k}_{\Ltwo} \rightarrow 0$.
+\end{proposition}
+Thus,, the set $\Htwo(\Cplx_+)$ is not an open set of $\Ltwo(\imath\Real)$. As a consequence, it is always possible to approximate a stable model $H$ by an unstable one of order $k$ while decreasing the mismatch error $\norm{H -\tilde H_k}_{\Ltwo}$. Similarly, let us now consider the case where the initial model $H$ both has stable and unstable modes. 
+
+\begin{proposition}[Unstable approximate of unstable model \cite{PontesECC:2015}] \label{propStability:unstable}
+	Given an unstable model $H\in \Ltwo(\imath\Real)\backslash \Htwo(\Cplx_+)$, there exists $\varepsilon>0$ such that the ball $B_{\varepsilon}(H)$ defined as 
+	\begin{eq}
+		B_{\varepsilon}(H)  = \Big\{\tilde H_k\in \Ltwo(\imath\Real)~ \big|~ \norm{H-\tilde H_k}_{\Ltwo} <\varepsilon \Big\},
+	\end{eq}
+	satisfies $B_{\varepsilon}(H)\subset \Ltwo(\imath\Real)\backslash \Htwo(\Cplx_+)$.
+\end{proposition}
+Thus, the set of unstable systems $\Ltwo(\imath\Real)\backslash \Htwo(\Cplx_+)$ is an open set of $\Ltwo(\imath\Real)$. Moreover, by fixing an arbitrarily small $\varepsilon$, it is always possible to find a $\tilde H_k$ that is unstable too. Based on the above propositions, let us now formulate the stability argument which will be invoked in order to derive the proposed numerical procedure.
+
+\begin{theorem}[Main stability argument] \label{thmStability:Thm1}
+	Given an unstable system \\ $H\in \Ltwo(\imath\Real)\backslash \Htwo(\Cplx^+)$,  there exists  $r\in \mathbb{N}^*$ for which  the minimizer $\tilde H_k$ of order $k\in \mathbb{N}^*$, $k\geq r$, obtained from  the $\Ltwo$-approximation problem is also unstable.
+\end{theorem} 
+Since Proposition \ref{propStability:unstable} states that if a system $\tilde H_k$ is sufficiently close to an unstable system in the $\Ltwo(\imath\Real)$-norm, it is also unstable. Since, the subspace of rational finite LTI systems  function is dense in  $\Ltwo(\imath\Real)$, for a given unstable LTI system $H\in \Ltwo(\imath\Real)\backslash \Htwo(\Cplx^+)$,  a sequence $\tilde H_k$ of systems of order $k\in \mathbb N$ which satisfies the $\Ltwo$ approximation problem, will converge to $H$. Thus, due to Proposition \ref{propStability:unstable}, there exists an order $r\in\mathbb{N}^*$ such that if $k\geq r$, $\tilde H_k$ will be unstable as well.
+
+In other words there exists an approximation order $k\geq r$ such that if the original system $H$ is unstable, the approximated one $\tilde H$ is unstable too. Moreover, if one has found the global $\Ltwo$ minimizer of the approximation problem of order $r$, it will be stable if the original model is stable, due to Proposition \ref{propStability:ortho}, and it will be unstable if the original model is unstable, due to Theorem \ref{thmStability:Thm1}. 
+
+In \cite{PontesECC:2015}, these arguments are used to derive a procedure based on the \tfirka algorithm \cite{BeattieCDC:2012}, combined with a search of the approximation order $r$. This last procedure did provide quite good results but the search for an adequate order $r$ was complex. Moreover, the \tfirka is an $\Htwo(\Cplx_+)$-oriented procedure and its validity in the $\Ltwo(\imath\Real)$ function space is limited to models where the stable and anti-stable part is known \cite{Magruder:2010}. 
+
+Here, the $\Htwo$-optimal interpolatory conditions are released and one now considers the interpolatory conditions embedded in the Loewner framework instead. One major benefit of such a trade stands in the selection of the approximating order $r$, which may be automatically selected thanks the Loewner matrix rank computation. By coming back to the \mfsa procedure defined in Algorithm \ref{algo:MFSA}, step 2 provides a quite simplifying solution, where the dimension $r$ is automatically determined. Then, following Propositions \ref{propStability:stable} and \ref{propStability:unstable}, it appears quite natural that, after approximating the interpolated model $\tilde H$ with $\tilde H_s$ using the methodology proposed by \cite{Kohler:2014}, the $\Ltwo$ distance evaluation is applied. Indeed, as 
+\begin{itemize}
+	\item from a stable model it is always possible to find an unstable one which minimizes the $\Ltwo$ mismatch problem. If, based on an unstable approximation, a stable model with the same complexity (order) can be obtained without affecting the $\Ltwo$ norm, then the interpolated model is stable (as the original one).
+	\item from an unstable model, its global minimizer in the $\Ltwo$ sense should be unstable as well. Applying a stable approximation will lead to a large $\Ltwo$ mismatch. Then, one may confirm that the original model is unstable, as is its rational approximation.
+\end{itemize}
+
 
 \section{Application}\label{sec:app}
-The proposed methods in the the last sections are applied to a a generic example of a medium size business jet 
+The proposed methods in the last sections are applied to a a generic example of a medium size business jet 
 for which a detailed model of the rigid body dynamics, aerodynamics as well as structural dynamics is available.
 The model of the aircraft is divided into subsections, i.e. the front section, a middle section including the wings, and a rear section with the elevators and the aircraft's tail, so that the effect of an incoming gust can be realistically modeled. Each section features three gusts inputs, one for the actual gust and its two derivatives in time which are required to realistically model the unsteady aerodynamics. Having  gust inputs for each aircraft sections enables, for example, a delayed injection of a gust for each part  so that the gust can hit the different sections of the aircraft one after the other and mimic a realistic behavior.
- 
+
 To  compute and compare loads with  and without load alleviation controller an aircraft model with about 300 states  is available. Besides the basic aircraft dynamics, the model also includes realistic actuator and sensor models as well as a baseline control law, providing adequate handling qualities to the pilot.
 The control inputs to the open loop aircraft model are the  commands of the elevator, the inner ailerons and the outer ailerons. 
 The gust impact on the model is characterized by  nine inputs describing the position, velocity and acceleration impact at three different locations along the fuselage.
 As measured signals for feedback control, the pitch rate, the load factor,  and the angle of attack are provided.
 The provided baseline controller only commands the elevator, while  the load alleviation controller shall use the ailerons symmetrically to alleviate the bending moments due to gusts.
+In the following subsections the derived tool-chain is applied to design the gust load alleviation system for the available aircraft model.
 
-In the following subsections a low order model for the estimator design is derived first in section \ref{APPsubsec:model}  applying the techniques presented in section
-\ref{sec:mr}. Then, a disturbance estimator is derived following the approach in section \ref{sec:th}, including the point wise estimator design from subsection \ref{sec:strc} to derive the filter structure followed bz solving the RDEP by the optimization presented in subsection \ref{sec:tuning}. In the same section a simple proportional feedback law from the disturbance estimate to the ailerons is presented to close the loop.
-The stability of the closed loop is assessed in section \ref{APPsubsec:stab} and simulations results using the high fidelity benchmark model are reported in \ref{APPsubsec:sim}.
+%In the following subsections a low order model for the estimator design is derived first in section \ref{APPsubsec:model}  applying the techniques presented in section \ref{sec:mr}. Then, a disturbance estimator is derived following the approach in section \ref{sec:th}, including the point wise estimator design from subsection \ref{sec:strc} to derive the filter structure followed bz solving the RDEP by the optimization presented in subsection \ref{sec:tuning}. In the same section a simple proportional feedback law from the disturbance estimate to the ailerons is presented to close the loop. The stability of the closed loop is assessed in section \ref{APPsubsec:stab} and simulations results using the high fidelity benchmark model are reported in \ref{APPsubsec:sim}.
 
 \subsection{Model approximation}\label{APPsubsec:model}
 Ten LTI aircraft models, each of about 300 states, linearized on 10 different trim points in the flight envelope, i.e. different speeds and altitudes, and weight and balance domain, i.e., different masses and center of gravity positions, are available.
@@ -343,7 +453,8 @@ Finally, the 10 aircraft models each of about 300 states with nine disturbance i
 
 
 \subsection{Gust load alleviation system}\label{APPsubsec:sys}
-The two degree of freedom gust load alleviation system consists of the disturbance estimator designed with the approaches in section \ref{sec:th} and a simple control law. In the following the disturbance estimator as well as the controller is designed for the business jet aircraft. For the estimator design the reduced order models derived in section \ref{APPsubsec:model} are used. The control law is a simple feedback of the estimated gust to the symmetric aileron deflection. Note that only the ailerons are used to mitigate the gust loads. The ailerons only induce, due to their proximity to the center of gravity in the longitudinal direction, a neglectable pitching  moment. This minimizes the influence of the additional control law on the handling qualities provided to the pilot.
+The two degree of freedom gust load alleviation system consists of the disturbance estimator $O$ designed with the approaches in section \ref{sec:th} and a feedback control law $C_{\Delta\xi}$ as schematically illustrated in figure \ref{fig:cl}. In this figure, plant $G$ in this illustration  includes the aircraft dynamics as well as sensor and actuator dynamics. The observer $O$ generates the gust estimate $\tilde d$ of the unknown input $d$, using the available measurements and control inputs. The estimated gust is feed back to the controller $C_{\Delta\xi}$ which generates the additional  deflections  $\Delta \xi_i$  and $\Delta \xi_o$ on the inner and outer ailerons, respectively. Note, that on the real aircraft the generated symmetric commands $\Delta \xi_i$ $\Delta \xi_o$ are added to the asymmetric aileron commands  $\xi_i$  and $ \xi_o$ for controlling the lateral axis of the aircraft. However, the lateral motion is not modeled in the simulation model used herein. The baseline controller $C_\eta$ control the longitudinal motion of the aircraft and ensures adequate handling qualities.
+ 
 
 \begin{figure}[h]
 	%\centering
@@ -354,7 +465,11 @@ The two degree of freedom gust load alleviation system consists of the disturban
 	\label{fig:cl}	
 \end{figure}
 
-A disturbance estimator with the presented methods in section \ref{sec:th} is designed for the aircraft. The  $N=10$ design models after the model approximation features 25 states, three control inputs, namely elevator, symmetric inner aileron and symmetric outer aileron position, one gust input and the two measurable outputs, \ie,  pitch rate and the load factor. For the  10 available aircraft models, 10 disturbance estimators are derived and the common structure is extracted.
+
+
+
+For the design of the estimator $O$  the 10 reduced order models derived in section \ref{APPsubsec:model} are used 
+and the the presented methods in section \ref{sec:th} are applied. The  design models  feature 25 states, three control inputs, namely elevator, symmetric inner aileron and symmetric outer aileron position, one gust input and the two measurable outputs, \ie,  pitch rate and the load factor. For the  10 available aircraft models, 10 disturbance estimators are derived and the common structure is extracted.
 A common dynamic for the 10 resulting first order disturbance estimators is chosen at 0.1\,s, i.e. a pole at -10. This value allows a fast estimation of the incoming disturbance.
 Finally, applying the optimization step presented in section \ref{sec:tuning}  results in the disturbance estimator $O$ with the state space realization
 \begin{equation}\label{eq:obs}
@@ -386,8 +501,6 @@ B_e &=&
 Note that the zero elements in $D_e$ are kept 0 during the  optimization step. The zeros are common in all 10 disturbance estimators determined in the preliminary design step to extract the estimator structure.
 The disturbance estimator is discretized for the implementation in the high-fidelity simulation model with 80\,Hz using a standard Tustin approximation.
 The sampling rate of 80\,Hz correspond to the sampling rate available in the flight control computer on the actual aircraft.
-
-
 Having an estimate of the gust available, the estimate is feed back to symmetric aileron deflections to counteract the gust, i.e., 
 \begin{equation}	
 	\begin{bmatrix}
@@ -401,27 +514,41 @@ Having an estimate of the gust available, the estimate is feed back to symmetric
 	\end{bmatrix}
 	\tilde d.
 \end{equation}
-For this paper, constant gains between 0.75 and 1.5 have been selected for $k_{\xi_i}$ and $k_{\xi_o}$ for which the stability assessment is performed in the next section.
-
-%The overall structure of the closed loop system is depicted in Fig. \ref{fig:cl}. The baseline controller $C_\eta$ uses the measurements load factor $n_z$ and the pitch rate $q$ from the aircraft $AC$ as inputs to generate the elevator deflection $\eta$. It ensures adequate handling and disturbance rejection in the longitudinal, rigid body motion of the aircraft. The disturbances $d$ are acting on the aircraft as unknown inputs. The aircraft in this illustration also includes the sensor and actuator dynamics.
+Note that only the ailerons are used to mitigate the gust loads. Due to their proximity to the center of gravity in the longitudinal direction, the ailerons induce a neglectable pitching moment. This minimizes the influence of the additional control law on the aircraft handling qualities. For this paper, constant gains $k=k_{\xi_i}=k_{\xi_o}$  between -2.5 and -0.1 have been selected, for which the stability assessment is performed in the next section.
 
 
 
-\textcolor{red}{
-\subsection{Stability assessment}\label{APPsubsec:stab}
-Charles with results from the benchmark
-}
+\subsection{Stability Assessment}\label{APPsubsec:stab}
+In this section the proposed \mfsa procedure is applied to the considered aircraft models including two internal and one output delay. 
+Before running multiple simulations, we  are interested if the closed loop including the derived observer and the feedback gain, is stable. The multiple delays model depending on the feedback gain $k=k_{\xi_i}=k_{\xi_o}$ reads as
+\begin{eq}
+	H^{(i)}(s,k) = \C^{(i)}\big(s E^{(i)}-\A^{(i)}_0-\A^{(i)}_1e^{-\tau_1s}-\A^{(i)}_2e^{-\tau_2s}-\A^{(i)}_3e^{-\tau_3s}\big)^{-1}\B^{(i)},% + D^{(i)}.
+	\label{eq:stabilityTest}
+\end{eq}
+where $\tau_3$  stands as the additional output delay caused by the acquisition chain and $k\in\Real_-$ is the controller gain (here we use a static gain for simplicity) which will be used as tuning parameter to evaluate the closed-loop stability before time-domain simulations. Note, that the row dimension of the above matrices is around 500). Figure \ref{fig:stability} illustrates the results of the \mfsa when applied to \eqref{eq:stabilityTest}, for different frozen values of $k$, between $-2.5$ and $-0.1$ (here 50 points linearly spaced are used).
+
+\begin{figure}[bth]
+	%\centering
+	\sidecaption[]
+	\includegraphics[scale=.2]{stabilityAnalysis.pdf}
+	\caption{Stability index $S$ as a function of the feedback gain $k$, evaluated on the large-scale delayed equation \eqref{eq:stabilityTest}. }
+	\label{fig:stability}	
+\end{figure}
+With reference to figure \ref{fig:stability}, it appears that a gain $k<-0.7571$ will result in a large index $S$, meaning that the closed-loop system gets unstable. Then for $-0.6143<k<-0.1$, the index becomes low, indicating that these values of the control gain result in a stable closed-loop. When time-domain simulations are performed (not provided herein due to confidentiality reasons) for these frozen $k$-values, quite similar results are obtained, confirming the functionality of the proposed analysis method.
+However, when $k$ is  between $-0.7571$ and $-0.7$, the stability index indicates a stable behavior although the system is actually unstable. This problem is not yet solved and additional studies are on-going to get more insight.
+At this point the authors consider a numerical problem caused by the large dimension of the model (\ref{eq:stabilityTest})  to be the source of the issue. 
 
 \subsection{Simulation based load verification}\label{APPsubsec:sim}
-The developed gust load alleviation system is verified in a high-fidelity non-linear simulation model of the medium sized business jet. It features the full order dynamics of the aircraft, as well as detailed sensor model with anti-aliasing filter, non-linear actuator models, the baseline control law for the longitudinal axis. The whole flight control system is simulated in discrete from with a sample rate of 80\,Hz.
+The developed gust load alleviation system is verified using a non-linear simulation model of the business jet. It features the full order aircraft model, detailed sensor models with anti-aliasing filters, non-linear actuator models, and the baseline control law for the longitudinal axis. The whole flight control system is simulated in discrete from with a sample rate of 80\,Hz. The loads on six dedicated position on each wing can be explicitly determined. For the work herein, the wind bending moments as predominant loads for sizing the aircraft structure are analyzed.
+The gust scenario is an 1-cosine gust \cite{Flomenhoft94,Fuller95}, hitting the aircraft from the front  with an upward  wind velocity and making its way over the three sections of the aircraft.
+Gust wavelengths between  27.5\,m and 46\,m are considered. The corresponding vertical gust speed  is a function of altitude and aircraft speed and is computed internally, lying between 10\,m/s and 16.5\,m/s.
 
-Due to the detailed structural model, the loads on six dedicated position on each wing can be determined. For the work herein, the wind bending moments will be computed as these are the predominant loads for sizing the structure of the aircraft.
-The gust scenario is an 1-cosine gust \cite{Flomenhoft94,Fuller95}, hitting the aircraft first at the front from either with an upward or downward wind velocity and making its way over the three sections of the aircraft.
-The required gust inputs are computed within the simulation internally for the three sections of the aircraft. The user needs to only define the  wavelength of the 1-cosine gust to be simulated.  Different gust wavelength between approximately 27.5\,m and 46\,m are considered. The vertical wind speed of each gust is a function of altitude and aircraft speed and is also computed internally, lying between about 10\,m/s and 16.5\,m/s.
+To verify the disturbance estimator capability to estimate the gusts an open loop simulation is performed. Figure \ref{fig:est} shows the estimated gusts in comparison to the actual gusts for all 10 available trim points. The first diagram depicts the results for a wavelength of  27.5\,m, the second for 34.7\,m, and the third for 46\,m. The wavelength of 34.7\,m is chosen as it is defined to be the sizing wavelength for this aircraft. Note the changing gust amplitudes for a constant wavelength setting in the diagrams of figure \ref{fig:est}. In the first diagram a common problem in gust estimation is visible: The encountered delay the gusts and their estimates results from sampling and delays in the used sensors. The gust inputs have already passed over some parts of the aircraft until its effect is visible in the sensors.
+For the slower gusts (second and third diagram) a similar delay is present, however, the estimation looks better due to the reduced gust velocities. Another issue is the resulting estimate after the actual gust. While it should be zero when the 1-cos gust is over, the gust estimate shows a large undershoot. 
+This is caused by a differentiating behavior from the gust input to the measured outputs. To counteract this behavior, one would require an integrator in the estimator. This would lead, however, to a deviating estimate over time due to the model uncertainties.  Thus, the differentiating behavior is also present in the gust to gust estimate channel, leading to the undershoots in figure  \ref{fig:est}. The undershoot however, does not cause any further problems as the induced moments are corrected easily by the baseline control law.
+Besides that, the actual estimates are rather good also in the non-linear simulation and can be used to alleviate the effect of the disturbances.
 
-First, to verify the disturbance estimator, the capability of estimating the gusts, the model is simulated with an open gust alleviation loop. Figure \ref{fig:est} shows the estimated gust in comparison to the actual gusts for all 10 available trim points. The first diagram shows the results for a selected wavelength of  27.5\,m, the second diagram for 34.7\,m, and the third on for 46\,m. The selected wavelength of 34.7\,m is chosen as it is defined to be the sizing wavelength for this aircraft. Note the changing gust amplitudes for a constant wavelength setting in the diagrams of figure \ref{fig:est}.
-
-\begin{figure}[hbt]
+\begin{figure}[bth]
 	%\centering
 	\sidecaption[]
 	\input{gusts.tikz}
@@ -429,9 +556,7 @@ First, to verify the disturbance estimator, the capability of estimating the gus
 	\label{fig:est}
 \end{figure}
 
-In the first diagram a common problem with the gust estimates is visible. A  delay between the gust inputs and the gust estimates is present specially for the fast gust inputs. This delay is the results of the sampling as well as the used sensors, i.e. the pitch rate and load factor. The gust input has already passed over some parts of the aircraft until its effect is visible in the sensors. For the slower gusts as depicted in the second and third diagram the same delay is present, however, as the gust themselves are slower, the actual responses look better.
-Another issue is the resulting estimate after the actual gust. While it should be zero when the 1-cos gust is over, the gust estimate shows a large undershoot of the zero value. This is caused by the following effect: the gust input to the measured outputs shows a differentiation behavior, i.e., a stationary gust does not show up in the available outputs. To make this gust now visible in an estimate would require an integrator, which is never desired as this would lead to a deviating estimate over time due to model uncertainties. Avoiding this integration in the estimator (which is ensured by a stable design) leads to a differentiating behavior also to the gust estimate. This effect is clearly visible in the second diagram. A differentiation causes the undershoot which is visible in all the estimates in figure  \ref{fig:est}. The undershoot however, does not cause any further problems as the induced moments are corrected easily by the baseline control law.
-Besides that, the actual estimates are rather good also in the non-linear simulation and can be used to alleviate the effect of the disturbances.
+
 
 Note that the baseline controller is active during all the simulations and counteracts the effect of the gust on the rigid body dynamics. This ensures that the aircraft is flying on its desired path although the gust encounter. Thus, for the gust estimator this can be interpreted as a robustness test, if the decoupling from the inputs is working. As visible in figure \ref{fig:est} the estimate are not influenced by these control inputs, which are active after about 0.75\,s simulation time. The gust estimate is close to zero at this point
 
@@ -443,23 +568,21 @@ Note that the baseline controller is active during all the simulations and count
 	\label{fig:loads}	
 \end{figure}
 
-Finally, the loads on the wings are computed without gust load alleviation controller and with. For each of the 10 trim points five different gust wavelength are simulated and the loads are recorded. For each trim point the maximum bending moment values  encountered during the simulation over the five different gust wave length is depicted in figure \ref{fig:loads} in dependence of the wing position. The same procedure is repeated with the estimator and the feedback law activated and is depicted in the second diagram of figure \ref{fig:loads}. the first diagram shows that the system without gust load alleviation system exactly meets the requirements on the five inner  points of the wing while on the most outer wing location the moments are far below the set threshold. When including the two degree of freedoms gust load alleviation system the loads are reduced by at least 3\,\%. The 3\,\% reduction occurs at the wing root for the bending moment. On the outer wing location the load reduction is even higher, reaching about 10\,\% between 8\,m and 10\,m wing span.
+Finally, the loads on the wings are computed without gust load alleviation controller and with.  Based on the stability analysis results a feedback gain of $k_{\xi_i}=k_{\xi_o}=0.6$ is selected. For each of the 10 trim points five different gust wavelength are simulated and the loads are recorded. For each trim point the maximum bending moment values  encountered during the simulation over the five different gust wave length is depicted in figure \ref{fig:loads} in dependence of the wing position. The same procedure is repeated with the estimator and the feedback law activated and is depicted in the second diagram of figure \ref{fig:loads}. the first diagram shows that the system without gust load alleviation system exactly meets the requirements on the five inner  points of the wing while on the most outer wing location the moments are far below the set threshold. When including the two degree of freedoms gust load alleviation system the loads are reduced by at least 3\,\%. The 3\,\% reduction occurs at the wing root for the bending moment. On the outer wing location the load reduction is even higher, reaching about 10\,\% between 8\,m and 10\,m wing span.
 This confirms that the developed gust load alleviation can reduce the loads on the aircraft.
 
 \section{Conclusions}
-In this paper an approach to design linear disturbance estimators of minimal order using the nullspace based design technique as well as advanced model approximation techniques has been presented. The proposed method has been successfully applied to a generic business jet aircraft model. Based on the estimated disturbance a simple control strategy has been employed to reduce the maximum wing bending moments encountered due to wind gusts.
-
-
+In this paper a tool-chain to develop a gust load alleviation control system is presented. Starting from high order, infinite models including time delays, a finite, low order model is approximated using numerically advanced techniques. These models are used to design  disturbance estimators using nullspace based and optimization based techniques. Finally, a novel analytical method to validate the stability of the resulting closed loop is presented. The tool-chain has been successfully applied to a generic business jet model to reduce the gust loads on the wing. 
 
 \begin{acknowledgement}
-This work has been funded within the frame of the Joint Technology Initiative JTI Clean Sky 2, AIRFRAME Integrated Technology Demonstrator platform "AIRFRAME ITD" (contract N$^\circ$ CSJU-CS2-GAM-AIR-2014-15-01 Annex 1, Issue B04, October 2nd, 2015) being part of the Horizon 2020 research and Innovation framework program of the European Commission.
+This work has been funded within the frame of the Joint Technology Initiative JTI Clean Sky 2, AIRFRAME Integrated Technology Demonstrator platform "AIRFRAME ITD" (CSJU-CS2-GAM-AIR-2014-15-01 Annex 1, Issue B04, October 2nd, 2015) being part of the Horizon 2020 research and Innovation framework program of the European Commission.
 \end{acknowledgement}
 %
 %\section*{Appendix}
 %\addcontentsline{toc}{section}{Appendix}
 
 \bibliographystyle{spmpsci}
-\bibliography{BIB_Ossmann,_biblioCPV,_biblioPoussot}
+\bibliography{BIB_Ossmann,_biblioCPV2,_biblioPoussot2}
 %\printbibliography
 
 %\input{referenc}
