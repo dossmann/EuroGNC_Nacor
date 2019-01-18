@@ -286,7 +286,7 @@ for $i=1,\dots,N$, where $P_{\min}$ and $P_{\max}$ are the minimum and maximum v
 
 \section{Stability assessment}\label{sec:st}
 
-As mentioned in section \ref{sec:mr}, the considered aircraft models naturally embed internal as well as input and output delays. Looping outputs to inputs through an observer/controller structure then leads to dynamical models with  numerous delays. It is preferred, however, to work on a finite-order approximated model $\hat H$ for the estimator and control law design as is allows the use of standard numerical tools. Obviously is is better to assess the closed-loop stability on the original \textit{delayed} model before running numerous simulations.
+As mentioned in section \ref{sec:mr}, the considered aircraft models naturally embed internal as well as input and output delays. Looping outputs to inputs through an observer/controller structure then leads to dynamical models with  numerous delays. It is preferred, however, to work on a finite-order approximated model $\hat H$ for the estimator and control law design as is allows the use of standard numerical tools. Obviously it is better to assess the closed-loop stability on the original \textit{delayed} model before running numerous simulations.
 Depending on the number of delays and states equations describing the model, this assessment can become complicated. Up to the authors' knowledge, no  standard tools are available to explicitly consider this analysis problem. Thus, in this section we propose a procedure (with partial theoretical proof) to approximate the stability of a large-scale multiple-delay dynamical equations. 
 
 \subsection{Preliminaries and proposed algorithm }
