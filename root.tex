@@ -58,7 +58,7 @@
 \author{Daniel Ossmann and Charles Poussot-Vassal}
 % Use \authorrunning{Short Title} for an abbreviated version of
 % your contribution title if the original one is too long
-\institute{Dr. Daniel Ossmann \at Institute of System Dynamics and Control, German Aerospace Center, Muenchener Strasse 20, 82234 Wessling, Germany, \email{daniel.ossmann@dlr.de}
+\institute{Dr. Daniel Ossmann \at Institute of System Dynamics and Control, German Aerospace Center, Muenchener Strasse 20, 82234 Wessling, Germany, \email{Daniel.Ossmann@dlr.de}
 \and Dr. Charles Poussot-Vassal \at Systems and Signal Processing Department, ONERA Centre de Toulouse, 2 Avenue Edouard Belin, 31000 Toulouse, France \email{Charles.Poussot-Vassal@onera.fr}}
 %
 % Use the package "url.sty" to avoid
@@ -185,10 +185,10 @@ Consider the set of linear models described by the input-output form
 	y^{(i)}(s) = G_u^{(i)}(s) u(s) + G_{n}^{(i)}(s) n(s)  + G_d^{(i)}(s) d(s),
 \end{equation}
 where $y^{(i)}(s)$, $u(s)$, and $n(s)$  are the Laplace-transformed
-vectors of the $p$-dimensional system output vector $y^{(i)}(t)$, the $m_u$-dimensional control input vector $u(t)$, and the $m_{n}$-dimensional noise vector $n(t)$, respectively. The noise vector includes any non-measurable disturbances which are need to be decoupled from the estimate. $d(s)$ is the Laplace-transformed of the scalar  disturbance input $d(t)$ to be estimated.
-$G_u^{(i)}(s)$, $G_{n}^{(i)}(s)$, and $G_d^{(i)}(s)$ are the transfer-function matrices (TFMs) from control inputs to  outputs, noise inputs to outputs, and disturbance  to outputs, respectively.  The index ${(i)}$ is used to describe the set of $i=1,\dots, N$ linear models which are linearized on different trim points.
+vectors of the $p$-dimensional system output vector $y^{(i)}(t)$, the $m_u$-dimensional control input vector $u(t)$, and the $m_{n}$-dimensional noise vector $n(t)$, respectively. The noise vector includes any non-measurable disturbances, which are need to be decoupled from the estimate. $d(s)$ is the Laplace-transformed of the scalar  disturbance input $d(t)$ to be estimated.
+$G_u^{(i)}(s)$, $G_{n}^{(i)}(s)$, and $G_d^{(i)}(s)$ are the transfer-function matrices (TFMs) from control inputs to  outputs, noise inputs to outputs, and disturbance  to outputs, respectively.  The index ${(i)}$ is used to describe the set of $i=1,\dots, N$ linear models, which are linearized on different trim points.
 
-The design goal is to derive a single linear disturbance estimator $O(s)$ which processes the measurable system outputs $y^{(i)}(t)$ and control inputs $u(t)$ and generates the disturbance estimate $\tilde d(t)$. In the input-output form this can be described by
+The design goal is to derive a single linear disturbance estimator $O(s)$, which processes the measurable system outputs $y^{(i)}(t)$ and control inputs $u(t)$ and generates the disturbance estimate $\tilde d(t)$. In the input-output form this can be described by
 \begin{equation}\label{eq:est}
 	\tilde d^{(i)}(s) = O(s)
 	\begin{bmatrix}
@@ -204,7 +204,7 @@ From the general description in (\ref{eq:est}) follows the definition of the rob
 		(b) &\tilde d^{(i)} \approx d &\text{when } d \neq 0 \,\, \text{  for  } \,\, i=1,\dots,N 
 	\end{array}
 \end{equation}
-Note that in (\ref{eq:rdep}) an approximated form is used, i.e. the estimate shall be approximately zero when for any control and noise input. In case of such a multi-model formulation an exact decoupling over all models generally cannot be achieved. The remainder of this section focuses on a strategy how the RDEP can be numerically solved.
+Note that in (\ref{eq:rdep}) an approximated form is used, i.e., the estimate shall be approximately zero  for any control and noise inputs. In case of such a multi-model formulation an exact decoupling over all models generally cannot be achieved. The remainder of this section focuses on a strategy how the RDEP can be numerically solved.
 
 
 
@@ -240,7 +240,7 @@ describing the  $i^{\text{th}}$ disturbance estimate $\tilde d^{(i)}(s)$ in depe
 demanding an exact decoupling of the control inputs $u$ and the noise $n$ from the disturbance estimate in $(\tilde a)$ and an approximative estimation of the disturbance $d$ in $(b)$ 
 
 Next, the formulated requirements in $(\tilde a)$ and $(\tilde b)$ can be transformed into  algebraic conditions. 
-The decoupling condition $(a)$ requires that the disturbance estimate $\tilde d(s)$ is decoupled from all inputs $u(s)$ and noise $n(s)$. This is equivalent of demanding 
+The decoupling condition $(a)$ requires that the disturbance estimate $\tilde d(s)$ is decoupled from all inputs $u(s)$ and noise $n(s)$. This is equivalent to demanding 
 \begin{equation}\label{eq:ns}
 O^{(i)}(s) 
 \begin{bmatrix}
@@ -257,14 +257,14 @@ G_{d}^{(i)}(s)  \\  0
 \end{bmatrix}
 \neq  0
 \end{equation}
-must be fulfilled to ensure the estimate-ability of the disturbance. If or not the DEP in (\ref{eq:ns}) and (\ref{eq:c2}) can be solved exactly is based on  necessary and sufficient rank criteria. As for realistic design problems this condition is often fulfilled, it is nor further discussed herein. Interested readers are referred to \cite{Var09, Ossmann18ccta, Varga17}.
-The required nullspace computation in (\ref{eq:ns})  can  be solved readily available using numerical tools \cite{Varga17}. If the DEP is solvable, a disturbance estimator can be constructed from the nullspace basis ensuring (\ref{eq:c2}) as well as the minimal order of the resulting estimator. In this design procedure, the actual dynamics of the estimator are a design freedom, i.e. the poles of the filter can be freely chosen.
+must be fulfilled to ensure the estimate-ability of the disturbance. If the DEP in (\ref{eq:ns}) and (\ref{eq:c2}) can be solved exactly is based on  necessary and sufficient rank criteria. As for realistic design problems this condition is often fulfilled, it is not further discussed herein. Interested readers are referred to \cite{Var09, Ossmann18ccta, Varga17}.
+The required nullspace computation in (\ref{eq:ns})  can  be solved readily available using numerical tools \cite{Varga17}. If the DEP is solvable, a disturbance estimator can be constructed from the nullspace basis ensuring (\ref{eq:c2}) as well as the minimal order of the resulting estimator. In this design procedure, the actual dynamics of the estimator are a design freedom, i.e., the poles of the filter can be freely chosen.
 
 At this point of the design approach, the DEP has been solved for each of the $N$ models individually. As the underlying models often exhibit the same model structure, a common estimator structure often can be extracted, reducing the complexity of the  optimization described next. 
 
 
 \subsubsection{Parameter tuning}\label{sec:tuning}
-Having defined the structure and the free parameters $K$ of the estimator $O(s)$ in (\ref{eq:est}), the net task is to optimally tune these free parameters $K$ of the estimator. As criteria a $H_\infty$ norm optimization is selected for which numerical tools in \matlab are available. The disturbance estimator shall ensure the conditions defined in (\ref{eq:rdep}). The goal is to design a single estimator which decouples the control inputs and the noise for all $N$ models. As this can seldom be solved exactly, i.e. the decoupling condition (\ref{eq:ns}) cannot be fulfilled for all N models with a single estimator, we use the reformulation of the problem based on the $H_\infty$ norm. Thus, the decoupling requirement $(a)$ is expressed as  multi-model norm condition for  $i=1,\dots,N$ by
+Having defined the structure and the free parameters $K$ of the estimator $O(s)$ in (\ref{eq:est}), the net task is to optimally tune these free parameters $K$ of the estimator. As criteria a $H_\infty$-norm optimization is selected for which numerical tools in \matlab are available. The disturbance estimator shall ensure the conditions defined in (\ref{eq:rdep}). The goal is to design a single estimator which decouples the control inputs and the noise for all $N$ models. As this can seldom be solved exactly, i.e., the decoupling condition (\ref{eq:ns}) cannot be fulfilled for all $N$ models with a single estimator, we use the reformulation of the problem based on the $H_\infty$-norm. Thus, the decoupling requirement $(a)$ is expressed as  multi-model norm condition for  $i=1,\dots,N$ by
 \begin{equation}\label{eq:rc1}
 ||O(s) \, G_e^{(i)}(s) ||_\infty  \,\approx 0.
 \end{equation}
@@ -299,7 +299,7 @@ the meromorphic function is said to be of finite energy and $H\in\Ltwo$. Then, l
 \begin{eq}
 	\norm{H u}_{L_\infty} =  \norm{y}_{L_\infty} \leq  c \norm{u}_{L_2}.
 \end{eq}
-In this case, the system is said $\Ltwo$ stable (or $\Htwo$). This consideration, i.e. the complex-valued meromorphic function context, is the starting point for the proposed approach.
+In this case, the system is said $\Ltwo$ stable (or $\Htwo$). This consideration, i.e., the complex-valued meromorphic function context, is the starting point for the proposed approach.
 The corresponding proposed numerical procedure, summarized in algorithm \ref{algo:MFSA} below, embeds a relative simple but   effective, fast and reliable procedure. In the algorithm \ref{algo:MFSA} we first exactly match the original input-output model by a rational model $\tilde H\in\Ltwo$ which guarantees interpolatory conditions. Then, we seek for the best stable approximation $\tilde H_s\in\Htwo$ of the obtained model $\tilde H \in\Ltwo$. The $\Ltwo$ distance (inner product) between the interpolated $\tilde H$ and stable $\tilde H_s$ models is computed next. If this stability index is smaller than a given threshold, then one concludes that $\tilde H$ (and consequently $H$) is stable, and unstable otherwise. 
 In the following section we derive some arguments to justify the approach. The author stress, however, that detailed proves  are not fully available yet and are subject of ongoing research. 
 \vspace{-.2cm}
@@ -396,7 +396,7 @@ In \cite{PontesECC:2015}, these arguments are used to derive a procedure based o
 
 Here, the $\Htwo$-optimal interpolatory conditions are released and one now considers the interpolatory conditions embedded in the Loewner framework instead. One major benefit of such a trade stands in the selection of the approximating order $r$, which may be automatically selected thanks the Loewner matrix rank computation. By coming back to the \mfsa procedure defined in Algorithm \ref{algo:MFSA}, step 2 provides a quite simplifying solution, where the dimension $r$ is automatically determined. Then, following Propositions \ref{propStability:stable} and \ref{propStability:unstable}, it appears quite natural that, after approximating the interpolated model $\tilde H$ with $\tilde H_s$ using the methodology proposed by \cite{Kohler:2014}, the $\Ltwo$ distance evaluation is applied. Indeed, as 
 \begin{itemize}
-	\item from a stable model it is always possible to find an unstable one which minimizes the $\Ltwo$ mismatch problem. If, based on an unstable approximation, a stable model with the same complexity (order) can be obtained without affecting the $\Ltwo$ norm, then the interpolated model is stable (as the original one).
+	\item from a stable model it is always possible to find an unstable one which minimizes the $\Ltwo$ mismatch problem. If, based on an unstable approximation, a stable model with the same complexity (order) can be obtained without affecting the $\Ltwo$-norm, then the interpolated model is stable (as the original one).
 	\item from an unstable model, its global minimizer in the $\Ltwo$ sense should be unstable as well. Applying a stable approximation will lead to a large $\Ltwo$ mismatch. Then, one may confirm that the original model is unstable, as is its rational approximation.
 \end{itemize}
 
@@ -404,7 +404,7 @@ Here, the $\Htwo$-optimal interpolatory conditions are released and one now cons
 \section{Application}\label{sec:app}
 The proposed methods in the last sections are applied to a a generic example of a medium size business jet 
 for which a detailed model of the rigid body dynamics, aerodynamics as well as structural dynamics is available.
-The model of the aircraft is divided into subsections, i.e. the front section, a middle section including the wings, and a rear section with the elevators and the aircraft's tail, so that the effect of an incoming gust can be realistically modeled. Each section features three gusts inputs, one for the actual gust and its two derivatives in time which are required to realistically model the unsteady aerodynamics. Having  gust inputs for each aircraft sections enables, for example, a delayed injection of a gust for each part  so that the gust can hit the different sections of the aircraft one after the other and mimic a realistic behavior.
+The model of the aircraft is divided into subsections, i.e., the front section, a middle section including the wings, and a rear section with the elevators and the aircraft's tail, so that the effect of an incoming gust can be realistically modeled. Each section features three gusts inputs, one for the actual gust and its two derivatives in time, which are required to realistically model the unsteady aerodynamics. Having  gust inputs for each aircraft sections enables, for example, a delayed injection of a gust for each part  so that the gust can hit the different sections of the aircraft one after the other and mimic a realistic behavior.
 
 To  compute and compare loads with  and without load alleviation controller an aircraft model with about 300 states  is available. Besides the basic aircraft dynamics, the model also includes realistic actuator and sensor models as well as a baseline control law, providing adequate handling qualities to the pilot.
 The control inputs to the open loop aircraft model are the  commands of the elevator, the inner ailerons and the outer ailerons. 
@@ -413,12 +413,11 @@ As measured signals for feedback control, the pitch rate, the load factor,  and 
 The provided baseline controller only commands the elevator, while  the load alleviation controller shall use the ailerons symmetrically to alleviate the bending moments due to gusts.
 In the following subsections the derived tool-chain is applied to design the gust load alleviation system for the available aircraft model.
 
-%In the following subsections a low order model for the estimator design is derived first in section \ref{APPsubsec:model}  applying the techniques presented in section \ref{sec:mr}. Then, a disturbance estimator is derived following the approach in section \ref{sec:th}, including the point wise estimator design from subsection \ref{sec:strc} to derive the filter structure followed bz solving the RDEP by the optimization presented in subsection \ref{sec:tuning}. In the same section a simple proportional feedback law from the disturbance estimate to the ailerons is presented to close the loop. The stability of the closed loop is assessed in section \ref{APPsubsec:stab} and simulations results using the high fidelity benchmark model are reported in \ref{APPsubsec:sim}.
+%In the following subsections a low order model for the estimator design is derived first in section \ref{APPsubsec:model}  applying the techniques presented in section \ref{sec:mr}. Then, a disturbance estimator is derived following the approach in section \ref{sec:th}, including the point wise estimator design from subsection \ref{sec:strc} to derive the filter structure followed by solving the RDEP by the optimization presented in subsection \ref{sec:tuning}. In the same section a simple proportional feedback law from the disturbance estimate to the ailerons is presented to close the loop. The stability of the closed loop is assessed in section \ref{APPsubsec:stab} and simulations results using the high fidelity benchmark model are reported in \ref{APPsubsec:sim}.
 
 \subsection{Model approximation}\label{APPsubsec:model}
-Ten LTI aircraft models, each of about 300 states, linearized on 10 different trim points in the flight envelope, i.e. different speeds and altitudes, and weight and balance domain, i.e., different masses and center of gravity positions, are available.
-The high number of states as well as nine gust inputs of the models makes the 
-estimator and control design challenging. Thus the idea is to reduce the state dimension and the number  of disturbance inputs. In view of disturbance estimator and control design, it is preferable to use a single disturbance single input.
+Ten LTI aircraft models, each of about 300 states, linearized on ten different trim points in the flight envelope (i.e., different speeds and altitudes) and in the weight and balance domain (i.e., different masses and center of gravity positions) are available.
+The high number of states and the nine gust inputs make the estimator and control design challenging. Thus the idea is to reduce the state dimension and the number  of disturbance inputs. Considering the disturbance estimator and control design, it is preferable to use a single disturbance input.
 The nine disturbance inputs are used in the available simulation to model a \textit{single} gust hitting  three different sections  (front, middle, rear) of the aircraft one after another. The derivatives of the three gust input positions are required to consider the unsteady aerodynamics. 
 Consequently, the second and third set of gust inputs are equal to the first one but delayed by a fixed time delay. Thus, mathematically the second and third set of inputs can be derived by simply delaying the first on. Additionally, the velocity and acceleration of the first gust input can be derived by derivative action on the first gust input position, finally reducing the gust inputs to a single one.
 %After these modifications, the resulting model now embeds two internal delays (denoted $\tau_1$ and $\tau_2$, related to the velocity of the aircraft and patch where the gust is impacting the fuselage) and have a rank deflective descriptor form. These internal delays are explained by the use of exact delay actions applied on the exact derivative terms. As a consequence, at this stage, the linear time-invariant dynamical system can be represented by  first order descriptor realization with $n_u$ inputs (one signle gust niput), $n_y$ outputs, $n$ internal variables and two internal delays. The model is given by a set of differential and algebraic equations (\textbf{DAE}) where states are described by $\E\dx(t) =\A_0 \x(t) + \A_1 \x(t-\tau_1)+ \A_2 \x(t-\tau_2) +\B \u(t)$ (with $\E$ rank deflective) and outputs $\y(t) = \C \x(t)$, where, $\x(t) \in \Real^{n} := \mathcal X$ is the internal variables, and $\u(t) \in \Real^{n_u} := \mathcal U$ and $\y(t) \in \Real^{n_y} := \mathcal Y$ are the input, output functions, respectively, while $\E,\A_0,\A_1,\A_2 \in \mathds{R}^{n \times n}$, $\B \in \mathds{R}^{n\times n_u}$ and $\C \in \mathds{R}^{n_y \times n}$ are constant matrices. The matrix pencil is regular if the matrix $(\A_0 +\A_1e^{-\tau_1\lambda}+\A_2e^{-\tau_1\lambda}) - \lambda\E$ is non-singular for some finite $\lambda \in \Cplx$ and a $\{\tau_1,\tau_2\}$ couple. In this case, the associated transfer function is
@@ -431,7 +430,7 @@ After these modifications, the resulting models now embed two internal delays (d
 \end{eq}
 with the  rank defective matrix $E^{(i)}$,  the internal variables
 $x^{(i)}(t) \in \Real^{n_x} := \mathcal X$, and  the input and output functions $u(t) \in \Real^{n_u} := \mathcal U$ and $y^{(i)}(t) \in \Real^{n_y} := \mathcal Y$, respectively.  $E^{(i)},\A^{(i)}_0,\A^{(i)}_1,\A^{(i)}_2 \in \mathds{R}^{n_x \times n_x}$, $\B^{(i)} \in \mathds{R}^{n_x \times n_u}$ and $\C^{(i)} \in \mathds{R}^{n_y \times n_x}$ are constant matrices. 
-Note, we assume equivalent time delays $\tau_1$ and $\tau_2$ for all 10 models.
+Note, we assume equivalent time delays $\tau_1$ and $\tau_2$ for all ten models.
 
 The matrix pencil is regular if the matrix $(\A_0^{(i)} +\A_1^{(i)}e^{-\tau_1\lambda}+\A_2^{(i)}e^{-\tau_1\lambda}) - \lambda E^{(i)}$ is non-singular for some finite $\lambda \in \Cplx$ and a $\{\tau_1,\tau_2\}$ couple. In this case, the associated transfer functions are
 \begin{eq}
@@ -446,7 +445,7 @@ Now, this finite order models (\eg with a finite number of eigenvalues) can be r
 	\hat H^{(i)}(s) = \Cr^{(i)}\big(s\Er^{(i)}-\Ar^{(i)}\big)^{-1}\Br^{(i)}
 \end{eq}
 which minimize the (frequency-limited)  mismatch error. 
-Finally, the 10 aircraft models each of about 300 states with nine disturbance inputs have been approximated with 10 models each of order $r=25$ with a single disturbance input. These reduced models can now be used to design the disturbance estimator. 
+Finally, the 10 aircraft models each of about 300 states with nine disturbance inputs have been approximated with ten models each of order $r=25$ with a single disturbance input. These reduced models can now be used to design the disturbance estimator. 
 
 
 \subsection{Gust load alleviation system}\label{APPsubsec:sys}
@@ -464,9 +463,9 @@ The observer $O$ generates the gust estimate $\tilde d$ of the unknown input $d$
 \end{figure}
 
 
-For the design of the estimator $O$  the 10 reduced order models derived in section \ref{APPsubsec:model} are used 
-and the the presented methods in section \ref{sec:th} are applied. The  design models  feature 25 states, three control inputs, namely elevator, symmetric inner aileron and symmetric outer aileron position, one gust input and the two measurable outputs, \ie,  pitch rate and the load factor. For the  10 available aircraft models, 10 disturbance estimators are derived and the common structure is extracted.
-A common dynamic for the 10 resulting first order disturbance estimators is chosen at 0.1\,s, i.e. a pole at -10. This value allows a fast estimation of the incoming disturbance.
+For the design of the estimator $O$  the ten reduced order models derived in section \ref{APPsubsec:model} are used 
+and the the presented methods in section \ref{sec:th} are applied. The  design models  feature 25 states, three control inputs, namely elevator, symmetric inner aileron and symmetric outer aileron position, one gust input and the two measurable outputs, \ie,  pitch rate and the load factor. For the  ten available aircraft models, ten disturbance estimators are derived and the common structure is extracted.
+A common dynamic for the ten resulting first order disturbance estimators is chosen at 0.1\,s, i.e., a pole at -10. This value allows a fast estimation of the incoming disturbance.
 Finally, applying the optimization step presented in section \ref{sec:tuning}  results in the disturbance estimator $O$ with the state space realization
 \begin{equation}\label{eq:obs}
 	\begin{array}{rcr}
@@ -494,7 +493,7 @@ B_e &=&
 \end{bmatrix}. 
 \end{array}
 \end{equation*}
-Note that the zero elements in $D_e$ are kept 0 during the  optimization step. The zeros are common in all 10 disturbance estimators determined in the preliminary design step to extract the estimator structure.
+Note that the zero elements in $D_e$ are kept 0 during the  optimization step. The zeros are common in all ten disturbance estimators determined in the preliminary design step to extract the estimator structure.
 The disturbance estimator is discretized for the implementation in the high-fidelity simulation model with 80\,Hz using a standard Tustin approximation.
 The sampling rate of 80\,Hz correspond to the sampling rate available in the flight control computer on the actual aircraft.
 Having an estimate of the gust available, the estimate is feed back to symmetric aileron deflections to counteract the gust, i.e., 
@@ -541,16 +540,16 @@ The developed gust load alleviation system is verified using a non-linear simula
 The gust scenario is an 1-cosine gust \cite{Flomenhoft94,Fuller95}, hitting the aircraft from the front  with an upward  wind velocity and making its way over the three sections of the aircraft.
 Gust wavelengths between  27.5\,m and 46\,m are considered. The corresponding vertical gust speed  is a function of altitude and aircraft speed and is computed internally, lying between 10\,m/s and 16.5\,m/s.
 
-To verify the disturbance estimator capability to estimate the gusts an open loop simulation is performed. Figure \ref{fig:est} shows the estimated gusts in comparison to the actual gusts for all 10 available trim points. The first diagram depicts the results for a wavelength of  27.5\,m, the second for 34.7\,m, and the third for 46\,m. The wavelength of 34.7\,m is chosen as it is defined to be the sizing wavelength for this aircraft. Note the changing gust amplitudes for a constant wavelength setting in the diagrams of figure \ref{fig:est}. In the first diagram a common problem in gust estimation is visible: The encountered delay the gusts and their estimates results from sampling and delays in the used sensors. The gust inputs have already passed over some parts of the aircraft until its effect is visible in the sensors.
+To verify the disturbance estimator capability to estimate the gusts an open loop simulation is performed. Figure \ref{fig:est} shows the estimated gusts in comparison to the actual gusts for all ten available trim points. The first diagram depicts the results for a wavelength of  27.5\,m, the second for 34.7\,m, and the third for 46\,m. The wavelength of 34.7\,m is chosen as it is defined to be the sizing wavelength for this aircraft. Note the changing gust amplitudes for a constant wavelength setting in the diagrams of figure \ref{fig:est}. In the first diagram a common problem in gust estimation is visible: The encountered delay the gusts and their estimates results from sampling and delays in the used sensors. The gust inputs have already passed over some parts of the aircraft until its effect is visible in the sensors.
 For the slower gusts (second and third diagram) a similar delay is present, however, the estimation looks better due to the reduced gust velocities. Another issue is the resulting estimate after the actual gust. While it should be zero when the 1-cos gust is over, the gust estimate shows a large undershoot. 
-This is caused by a differentiating behavior from the gust input to the measured outputs. To counteract this behavior, one would require an integrator in the estimator. This would lead, however, to a deviating estimate over time due to the model uncertainties.  Thus, the differentiating behavior is also present in the gust to gust estimate channel, leading to the undershoots in figure  \ref{fig:est}. The undershoot however, does not cause any further problems as the induced moments are corrected easily by the baseline control law.
+This is caused by a differentiating behavior from the gust input to the measured outputs. To counteract this behavior, one would require an integrator in the estimator. This would lead, however, to a deviating estimate over time due to the model uncertainties.  Thus, the differentiating behavior is also present in the gust to gust estimate channel, leading to the undershoots in figure  \ref{fig:est}. The undershoot, however, does not cause any further problems as the induced moments are corrected easily by the baseline control law.
 Besides that, the actual estimates are rather good also in the non-linear simulation and can be used to alleviate the effect of the disturbances.
 
 \begin{figure}[bth]
 	%\centering
 	\sidecaption[]
 	\input{gusts.tikz}
-	\caption{Gust estimates (\ref{lin:1}) on the 10 available trim points for a gust input (\ref{lin:ref}) with a wavelength of 27.5\,m (first diagram), 34.7\,m (second), and 46\,m (third). }
+	\caption{Gust estimates (\ref{lin:1}) on the ten available trim points for a gust input (\ref{lin:ref}) with a wavelength of 27.5\,m (first diagram), 34.7\,m (second), and 46\,m (third). }
 	\label{fig:est}
 \end{figure}
 
@@ -566,7 +565,7 @@ Note that the baseline controller is active during all the simulations and count
 	\label{fig:loads}	
 \end{figure}
 
-Finally, the loads on the wings are computed without gust load alleviation controller and with.  Based on the stability analysis results a feedback gain of $k_{\xi_i}=k_{\xi_o}=0.6$ is selected. For each of the 10 trim points five different gust wavelength are simulated and the loads are recorded. For each trim point the maximum bending moment values  encountered during the simulation over the five different gust wave length is depicted in figure \ref{fig:loads} in dependence of the wing position. The same procedure is repeated with the estimator and the feedback law activated and is depicted in the second diagram of figure \ref{fig:loads}. the first diagram shows that the system without gust load alleviation system exactly meets the requirements on the five inner  points of the wing while on the most outer wing location the moments are far below the set threshold. When including the two degree of freedoms gust load alleviation system the loads are reduced by at least 3\,\%. The 3\,\% reduction occurs at the wing root for the bending moment. On the outer wing location the load reduction is even higher, reaching about 10\,\% between 8\,m and 10\,m wing span.
+Finally, the loads on the wings are computed without gust load alleviation controller and with.  Based on the stability analysis results a feedback gain of $k_{\xi_i}=k_{\xi_o}=0.6$ is selected. For each of the ten trim points five different gust wavelength are simulated and the loads are recorded. For each trim point the maximum bending moment values  encountered during the simulation over the five different gust wave length is depicted in figure \ref{fig:loads} in dependence of the wing position. The same procedure is repeated with the estimator and the feedback law activated and is depicted in the second diagram of figure \ref{fig:loads}. The first diagram shows that the system without gust load alleviation system exactly meets the requirements on the five inner  points of the wing while on the most outer wing location the moments are far below the set threshold. When including the two degree of freedoms gust load alleviation system the loads are reduced by at least 3\,\%. The 3\,\% reduction occurs at the wing root for the bending moment. On the outer wing location the load reduction is even higher, reaching about 10\,\% between 8\,m and 10\,m wing span.
 This confirms that the developed gust load alleviation can reduce the loads on the aircraft.
 
 \section{Conclusions}
