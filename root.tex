@@ -269,21 +269,13 @@ P_{\min} < P < P_{\max},
 \end{array}
 \end{equation}
 for $i=1,\dots,N$, where $P_{\min}$ and $P_{\max}$ are the minimum and maximum values of the tuning parameters and $\gamma$ is a parameter to define the accuracy of the disturbance estimate. The optimization problem in (\ref{eq:opt}) can be  solved numerically using standard Matlab tools as for example the \texttt{systune} command.
+ 
 
-
-
-<<<<<<< HEAD
-\section{Stability assessment}\label{sec:st}
-
-As mentioned in section \ref{sec:mr}, the considered aircraft models naturally embed internal as well as input and output delays. Looping outputs to inputs through an observer/controller structure then leads to dynamical models with  numerous delays. It is preferred, however, to work on a finite-order approximated model $\hat H$ for the estimator and control law design as is allows the use of standard numerical tools. Obviously it is better to assess the closed-loop stability on the original \textit{delayed} model before running numerous simulations.
-Depending on the number of delays and states equations describing the model, this assessment can become complicated. Up to the authors' knowledge, no  standard tools are available to explicitly consider this analysis problem. Thus, in this section we propose a procedure (with partial theoretical proof) to approximate the stability of a large-scale multiple-delay dynamical equations. 
-
-\subsection{Preliminaries and proposed algorithm }
-=======
 \section{Stability Assessment}\label{sec:st}\vspace{-1mm}
 As mentioned in Sect.~\ref{sec:mr}, the considered aircraft models naturally embed internal as well as input and output delays. Looping outputs to inputs through an observer/controller structure then leads to dynamical models with  numerous delays. It is preferred, however, to work on a finite-order approximated model $\hat H$ for the estimator and control law design as is allows the use of standard numerical tools. Obviously is is better to assess the closed-loop stability on the original \textit{delayed} model before running numerous simulations.
-Depending on the number of delays and states equations describing the model, this assessment can become complicated. Up to the authors' knowledge, no  standard tools are available to explicitly consider this analysis problem. Thus, we propose a procedure (with partial theoretical proof) to approximate the stability of a large-scale multiple-delay dynamical equations. \vspace{-1mm}
->>>>>>> 4d32bd17763730c583cd8e611f30650ecd286a15
+Depending on the number of delays and states equations describing the model, this assessment can become complicated. Up to the authors' knowledge, no  standard tools are available to explicitly consider this analysis problem. Thus, we propose a procedure (with partial theoretical proof) to approximate the stability of  large-scale multiple-delay dynamical equations. \vspace{-1mm}
+
+
 
 \subsection{Preliminaries and Proposed Algorithm}\vspace{-1mm}
 Stability of a dynamical systems is clearly one of the main property to assess in control theory, numerical simulation, optimization, etc. Without loss of generalities, in the case of "classical"\footnote{By "classical", ones means equipped with the $(E,A,B,C,D)$ realization.} linear time-invariant (LTI) models either described by a set of ordinary differential equations or differential algebraic equations, the stability problem is recast as  eigenvalue problem. In this specific case, the number of eigenvalues is finite and its computational complexity is only related to the $(E,A)$ pencil calculation\footnote{In this case, very efficient tools already exist such as LAPACK.}. If instead, the LTI model $H$ has an infinite number of singularities or its realization is not necessarily available, the stability assessment becomes much more tedious. Delay invariant models fall within this category. In these cases, tailored solutions are usually invented to deal with these specificity (\eg the time-delay stability analysis literature is very important and one may refer to \cite{Richard:2003,Sipahi:2011,Seuret:2015,BriatBook:2015}).  Let us start by noticing that, delayed equations are meromorphic (real-valued) complex functions given as $H :  \Cplx \mapsto   \Cplx^{n_y\times n_u}$. Moreover, if $H$ ensures 
@@ -563,7 +555,7 @@ Finally, the loads on the wings are computed without gust load alleviation contr
 This confirms that the developed gust load alleviation sufficiently alleviates the aircraft loads.\vspace{-1mm}
 
 \section{Conclusions}\vspace{-1mm}
-In this paper a tool-chain to develop a gust load alleviation control system is presented. Starting from high order, infinite-dimensional models including time delays, a finite-dimensional, low order model is approximated using numerically advanced techniques. These models are used to design  disturbance estimators using nullspace based and optimization based techniques. Finally, a novel analytical method to validate the stability of the resulting closed loop is presented. The tool-chain has been successfully applied to a generic business jet model to reduce the gust loads on the wing. 
+In this paper a tool-chain to develop a gust load alleviation control system is presented. Starting from high order, infinite-dimensional models including time delays, a finite-dimensional, low order model is approximated using numerically advanced techniques. These models are used to design  disturbance estimators using nullspace based and optimization based techniques. Finally, a novel analytical method to validate the stability of the resulting closed loop is presented. The tool-chain has been successfully applied to a generic business jet model to alleviate the gust loads on the wing. 
 
 \vspace{-2mm}
 \begin{acknowledgement}
